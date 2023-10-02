@@ -1,5 +1,10 @@
 import { Schema, model } from "mongoose";
-import { IUser } from "../types/admin";
+
+export interface IUser {
+  _id: String;
+  login: string;
+  password: string;
+}
 
 export const UserSchema = new Schema<IUser>({
   login: { type: String, required: true, unique: true },

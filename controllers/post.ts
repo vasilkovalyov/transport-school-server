@@ -3,10 +3,15 @@ import status from "../utils/status";
 import { PostService } from "../services";
 
 class PostController {
+  postService: PostService;
+
+  constructor() {
+    this.postService = new PostService();
+  }
+
   async create(req: Request, res: Response) {
-    const postService = new PostService();
     try {
-      const response = await postService.create(req.body);
+      const response = await this.postService.create(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -30,11 +35,10 @@ class PostController {
   }
 
   async delete(req: Request, res: Response) {
-    const postService = new PostService();
     try {
       const { id } = req.params;
 
-      const response = await postService.delete(id);
+      const response = await this.postService.delete(id);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -45,11 +49,10 @@ class PostController {
   }
 
   async getPost(req: Request, res: Response) {
-    const postService = new PostService();
     try {
       const { id } = req.params;
 
-      const response = await postService.getPost(id);
+      const response = await this.postService.getPost(id);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -60,10 +63,9 @@ class PostController {
   }
 
   async getPaginatedPosts(req: Request, res: Response) {
-    const postService = new PostService();
     try {
       const { size, page } = req.body;
-      const response = await postService.getPaginatedPosts(size, page);
+      const response = await this.postService.getPaginatedPosts(size, page);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;

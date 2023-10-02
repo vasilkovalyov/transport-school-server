@@ -7,7 +7,7 @@ import { AuthMessages } from "../constants/response-messages";
 import { IUserLogin } from "../types/admin";
 
 class AuthService {
-  static async login({ login, password }: IUserLogin) {
+  async login({ login, password }: IUserLogin) {
     const userModel = await UserModel.findOne({
       login: login,
     });
@@ -29,7 +29,7 @@ class AuthService {
     };
   }
 
-  static async registration({ login, password }: IUserLogin) {
+  async registration({ login, password }: IUserLogin) {
     const userExist = await UserModel.findOne({ login: login });
     if (userExist) throw ApiError.BadRequestError(AuthMessages.userExist);
 

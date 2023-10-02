@@ -5,9 +5,15 @@ import status from "../utils/status";
 import { AuthMessages } from "../constants/response-messages";
 
 class AuthController {
+  authService: AuthService;
+
+  constructor() {
+    this.authService = new AuthService();
+  }
+
   async login(req: Request, res: Response) {
     try {
-      const response = await AuthService.login(req.body);
+      const response = await this.authService.login(req.body);
       if (response) {
         res.cookie("token", response.token, {
           domain: process.env.DOMAIN,
@@ -31,7 +37,7 @@ class AuthController {
 
   async registration(req: Request, res: Response) {
     try {
-      const response = await AuthService.registration(req.body);
+      const response = await this.authService.registration(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
