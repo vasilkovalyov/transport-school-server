@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { TokenService, AuthService, ApiError } from "../../services";
-import status from "../../utils/status";
-import { AuthMessages } from "../../constants/response-messages";
+import { TokenService, AuthService, ApiError } from "../services";
+import status from "../utils/status";
+import { AuthMessages } from "../constants/response-messages";
 
 class AuthController {
   async login(req: Request, res: Response) {

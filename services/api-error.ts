@@ -1,4 +1,4 @@
-import status from "../../utils/status";
+import status from "../utils/status";
 
 class ApiError extends Error {
   status: number;
