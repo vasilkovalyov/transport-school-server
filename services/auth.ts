@@ -1,10 +1,10 @@
 import ApiError from "./api-error";
-import { UserModel } from "../../models";
+import { UserModel } from "../models";
 
 import bcrypt from "bcrypt";
 import TokenService from "./token";
-import { AuthMessages } from "../../constants/response-messages";
-import { IUserLogin } from "../../types/admin";
+import { AuthMessages } from "../constants/response-messages";
+import { IUserLogin } from "../types/admin";
 
 class AuthService {
   static async login({ login, password }: IUserLogin) {

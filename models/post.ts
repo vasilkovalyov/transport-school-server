@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 
 export interface IPost {
+  _id: string;
   heading: string;
   slug: string;
   short_description: string;
@@ -10,10 +11,10 @@ export interface IPost {
 export const PostSchema = new Schema<IPost>({
   heading: { type: String, required: true, unique: true },
   slug: { type: String, required: true, unique: true },
-  short_description: { type: String },
-  rich_text: { type: String },
+  short_description: { type: String, default: null },
+  rich_text: { type: String, default: null },
 });
 
-const Post = model("Post", PostSchema);
+export const Post = model("Post", PostSchema);
 
 export default Post;

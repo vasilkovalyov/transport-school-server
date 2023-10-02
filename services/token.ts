@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import expires from "../../utils/expires";
+import expires from "../utils/expires";
 
 export interface ITokenVerifyResponse {
   _id: string;

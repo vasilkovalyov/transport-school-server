@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
+
 import { TokenService, AuthService, ApiError } from "../services";
 import status from "../utils/status";
 import { AuthMessages } from "../constants/response-messages";
@@ -42,50 +42,24 @@ class AuthController {
   }
 
   async refreshToken(req: Request, res: Response) {
-    const refreshToken = req.headers.authorization;
-
-    if (!refreshToken) {
-      return res.sendStatus(status.UNAUTHORIZED);
-    }
-
     try {
+      const refreshToken = req.headers.authorization;
+      if (!refreshToken) throw ApiError.BadRequestError(AuthMessages.problemWithToken);
+
       const tokenData = TokenService.validateToken(refreshToken, "refresh");
       if (!tokenData) throw ApiError.BadRequestError(AuthMessages.problemWithToken);
+
       const tokensData = TokenService.generateTokens({
         _id: tokenData._id,
       });
-      res.json(tokensData);
+
+      return res.status(status.SUCCESS).json(tokensData);
     } catch (e) {
-      if (e instanceof Error) {
-        return res.status(status.BAD_REQUEST).json({
-          error: e.message,
-        });
-      }
+      if (!(e instanceof Error)) return;
+      return res.status(status.BAD_REQUEST).json({
+        error: e.message,
+      });
     }
-
-    // jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET || "", (err, decoded) => {
-    //   if (err) {
-    //     return res.sendStatus(403);
-    //   }
-
-    //   console.log("decoded", decoded);
-
-    //   res.json({ decoded: decoded });
-    // });
-
-    // if (!tokenData) {
-    //   return res.sendStatus(403);
-    // }
-    return "1";
-
-    // jwt.verify(refreshToken, secretKey, (err, decoded) => {
-    //   if (err) {
-
-    //   }
-
-    //   const accessToken = generateAccessToken(decoded.userId);
-    //   res.json({ accessToken });
-    // });
   }
 }
 
