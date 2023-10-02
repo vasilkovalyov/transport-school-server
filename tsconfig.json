@@ -30,6 +30,6 @@
     "noImplicitThis": true,
     "strictBindCallApply": true
   },
-  "include": ["src/**/*"],
+  "include": ["./*"],
   "exclude": ["node_modules", "build"]
 }
