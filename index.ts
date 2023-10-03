@@ -1,11 +1,11 @@
-import express, { Request, Response, Express } from "express";
+import express, { Express } from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
 import dotenv from "dotenv";
 import fileUpload from "express-fileupload";
-import { authRoute, postRoute, lessonScheduleRoute, serviceRoute } from "./routes";
+import { authRoute, postRoute, lessonScheduleRoute, serviceRoute, heroRoute } from "./routes";
 
 import databaseConnect from "./database";
 
@@ -31,6 +31,8 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", postRoute);
   server.use("/api/dashboard", serviceRoute);
   server.use("/api/dashboard", lessonScheduleRoute);
+
+  server.use("/api/dashboard", heroRoute);
 
   try {
     databaseConnect()
