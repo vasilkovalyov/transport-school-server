@@ -24,7 +24,7 @@ class LessonScheduleController {
 
   async update(req: Request, res: Response) {
     try {
-      const response = await this.lessonScheduleService.update(req.body);
+      const response = await this.lessonScheduleService.update({ ...req.body, _id: req.params.id });
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;

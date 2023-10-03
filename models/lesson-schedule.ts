@@ -9,7 +9,8 @@ export interface ILessonSchedule {
   type_lesson: LessonType;
   day_start_shedule: string;
   day_end_shedule: string;
-  time_schedule: string;
+  time_schedule_start: string;
+  time_schedule_end: string;
   date_start: string;
 }
 
@@ -19,7 +20,8 @@ export const LessonScheduleSchema = new Schema<ILessonSchedule>({
   type_lesson: { type: String, default: null },
   day_start_shedule: { type: String, default: null },
   day_end_shedule: { type: String, default: null },
-  time_schedule: { type: String, default: null },
+  time_schedule_start: { type: String, default: null },
+  time_schedule_end: { type: String, default: null },
   date_start: { type: String, default: null },
 });
 
