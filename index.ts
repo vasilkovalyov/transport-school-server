@@ -5,7 +5,7 @@ import compression from "compression";
 import cors from "cors";
 import dotenv from "dotenv";
 import fileUpload from "express-fileupload";
-import { authRoute, postRoute } from "./routes";
+import { authRoute, postRoute, lessonScheduleRoute } from "./routes";
 
 import databaseConnect from "./database";
 
@@ -29,6 +29,7 @@ import databaseConnect from "./database";
 
   server.use("/api/dashboard", authRoute);
   server.use("/api/dashboard", postRoute);
+  server.use("/api/dashboard", lessonScheduleRoute);
 
   try {
     databaseConnect()
