@@ -1,21 +1,19 @@
 import { Request, Response } from "express";
 import status from "../../utils/status";
-import { BlockHeroService } from "../../services";
+import { BlockServicesService } from "../../services";
 
 import { IBlockController } from "./block";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
 
-class PostController implements IBlockController {
-  blockHeroService: BlockHeroService;
+class BlockServicesController implements IBlockController {
+  BlockServicesService: BlockServicesService;
 
   constructor() {
-    this.blockHeroService = new BlockHeroService();
+    this.BlockServicesService = new BlockServicesService();
   }
 
   async create(req: Request, res: Response) {
     try {
-      const response = await this.blockHeroService.create(req.body);
+      const response = await this.BlockServicesService.create(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -27,7 +25,7 @@ class PostController implements IBlockController {
 
   async update(req: Request, res: Response) {
     try {
-      const response = await this.blockHeroService.update({ ...req.body, _id: req.params.id });
+      const response = await this.BlockServicesService.update({ ...req.body, _id: req.params.id });
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -41,7 +39,7 @@ class PostController implements IBlockController {
     try {
       const { page } = req.params;
 
-      const response = await this.blockHeroService.getBlock(page);
+      const response = await this.BlockServicesService.getBlock(page);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -55,7 +53,7 @@ class PostController implements IBlockController {
     try {
       const { page } = req.body;
 
-      const response = await this.blockHeroService.publish(page);
+      const response = await this.BlockServicesService.publish(page);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -69,7 +67,7 @@ class PostController implements IBlockController {
     try {
       const { page } = req.body;
 
-      const response = await this.blockHeroService.unpublish(page);
+      const response = await this.BlockServicesService.unpublish(page);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -80,4 +78,4 @@ class PostController implements IBlockController {
   }
 }
 
-export default PostController;
+export default BlockServicesController;

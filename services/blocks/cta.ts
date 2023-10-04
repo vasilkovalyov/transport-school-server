@@ -1,7 +1,7 @@
-import Block from "./block";
+import { IBlockService } from "./block";
 import { BlockCtaModel, IBlockCta } from "../../models";
 
-class BlockCta extends Block<IBlockCta> {
+class BlockCta implements IBlockService<IBlockCta> {
   async create(data: IBlockCta) {
     const post = await new BlockCtaModel(data);
     await post.save();

@@ -1,9 +1,7 @@
-abstract class Block<T> {
-  abstract create(data: T);
-  abstract update(data: T);
-  abstract publish(pageName: string);
-  abstract unpublish(pageName: string);
-  abstract getBlock(page: string);
+export interface IBlockService<T> {
+  create: (data: T) => void;
+  update: (data: T) => void;
+  getBlock: (page: string) => void;
+  publish: (pageName: string) => void;
+  unpublish: (pageName: string) => void;
 }
-
-export default Block;
