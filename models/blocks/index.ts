@@ -1,12 +1,12 @@
 export { default as BlockAboutModel, type IBlockAbout } from "./about";
 export { default as BlockAboutCourseModel, type IBlockAboutCourse } from "./about-course";
 export { default as BlockAboutUsModel, type IBlockAboutUs } from "./about-us";
-export { default as BlockAchivments, type IBlockAchivments } from "./achivments";
+export { default as BlockAchivmentsModel, type IBlockAchivments } from "./achivments";
 export { default as BlockBenefitsModel, type IBlockBenefits } from "./benefits";
 export { default as BlockBlogModel, type IBlockBlog } from "./blog";
 export { default as BlockContactFormModel, type IBlockContactForm } from "./contact-form";
 export { default as BlockContactsModel, type IBlockContacts } from "./contacts";
-export { default as BlockCourseForPeolpeModel, type IBlockCourseForPeople } from "./course-for-people";
+export { default as BlockCourseForPeopleModel, type IBlockCourseForPeople } from "./course-for-people";
 export { default as BlockCtaModel, type IBlockCta } from "./cta";
 export { default as BlockFaqModel, type IBlockFaq } from "./faq";
 export { default as BlockFormatLessonsModel, type IBlockFormatLessons } from "./format-lessons";

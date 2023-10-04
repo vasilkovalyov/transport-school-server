@@ -1,6 +1,7 @@
+import Block from "./block";
 import { BlockHeroModel, IBlockHero } from "../../models";
 
-class BlockHero {
+class BlockHero extends Block<IBlockHero> {
   async create(data: IBlockHero) {
     const post = await new BlockHeroModel(data);
     await post.save();
@@ -16,6 +17,16 @@ class BlockHero {
     return {
       message: "Block hero has updated",
     };
+  }
+
+  async publish(pageName: string) {
+    await BlockHeroModel.findOneAndUpdate({ block_page: pageName }, { publish: true });
+    return true;
+  }
+
+  async unpublish(pageName: string) {
+    await BlockHeroModel.findOneAndUpdate({ block_page: pageName }, { publish: false });
+    return true;
   }
 
   async getBlock(page: string) {
