@@ -5,7 +5,32 @@ import compression from "compression";
 import cors from "cors";
 import dotenv from "dotenv";
 import fileUpload from "express-fileupload";
-import { authRoute, postRoute, lessonScheduleRoute, serviceRoute, heroRoute } from "./routes";
+import {
+  authRoute,
+  postRoute,
+  lessonScheduleRoute,
+  serviceRoute,
+  blockAboutRoute,
+  blockAboutCourseRoute,
+  blockAboutUsRoute,
+  blockAchivmentsRoute,
+  blockBenefitsRoute,
+  blockBlogRoute,
+  blockContactFormRoute,
+  blockContactsRoute,
+  blockCourseForPeopleRoute,
+  blockCtaRoute,
+  blockFaqRoute,
+  blockFormatLessonsRoute,
+  blockHeroRoute,
+  blockRequirementRoute,
+  blockReviewsRoute,
+  blockScheduleRoute,
+  blockServicesRoute,
+  blockStructEducationRoute,
+  blockTeamEducationRoute,
+  blockWhoTeachRoute,
+} from "./routes";
 
 import databaseConnect from "./database";
 
@@ -32,7 +57,26 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", serviceRoute);
   server.use("/api/dashboard", lessonScheduleRoute);
 
-  server.use("/api/dashboard", heroRoute);
+  server.use("/api/dashboard", blockAboutRoute);
+  server.use("/api/dashboard", blockAboutCourseRoute);
+  server.use("/api/dashboard", blockAboutUsRoute);
+  server.use("/api/dashboard", blockAchivmentsRoute);
+  server.use("/api/dashboard", blockBenefitsRoute);
+  server.use("/api/dashboard", blockBlogRoute);
+  server.use("/api/dashboard", blockContactFormRoute);
+  server.use("/api/dashboard", blockContactsRoute);
+  server.use("/api/dashboard", blockCourseForPeopleRoute);
+  server.use("/api/dashboard", blockCtaRoute);
+  server.use("/api/dashboard", blockFaqRoute);
+  server.use("/api/dashboard", blockFormatLessonsRoute);
+  server.use("/api/dashboard", blockHeroRoute);
+  server.use("/api/dashboard", blockRequirementRoute);
+  server.use("/api/dashboard", blockReviewsRoute);
+  server.use("/api/dashboard", blockScheduleRoute);
+  server.use("/api/dashboard", blockServicesRoute);
+  server.use("/api/dashboard", blockStructEducationRoute);
+  server.use("/api/dashboard", blockTeamEducationRoute);
+  server.use("/api/dashboard", blockWhoTeachRoute);
 
   try {
     databaseConnect()

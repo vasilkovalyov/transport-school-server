@@ -11,7 +11,6 @@ class ServiceController {
 
   async create(req: Request, res: Response) {
     try {
-      console.log(req.body);
       const response = await this.Service.create(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
