@@ -4,3 +4,4 @@ export { default as serviceRoute } from "./service";
 export { default as lessonScheduleRoute } from "./lesson-schedule";
 
 export * from "./blocks";
+export * from "./pages";

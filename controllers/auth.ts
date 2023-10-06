@@ -26,7 +26,10 @@ class AuthController {
           secure: false,
         });
       }
-      return res.status(status.SUCCESS).json(response);
+      const { refreshToken, ...params } = response;
+
+      res.cookie("refreshToken", refreshToken, { maxAge: 600000, httpOnly: true });
+      return res.status(status.SUCCESS).json(params);
     } catch (e) {
       if (!(e instanceof Error)) return;
       return res.status(status.BAD_REQUEST).json({

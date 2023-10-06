@@ -6,3 +6,4 @@ export { default as Service } from "./service";
 export { default as LessonScheduleService } from "./lesson-schedule";
 
 export * from "./blocks";
+export * from "./pages";

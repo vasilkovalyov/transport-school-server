@@ -30,6 +30,7 @@ import {
   blockStructEducationRoute,
   blockTeamEducationRoute,
   blockWhoTeachRoute,
+  pageHomeRoute,
 } from "./routes";
 
 import databaseConnect from "./database";
@@ -40,7 +41,7 @@ import databaseConnect from "./database";
   dotenv.config();
 
   server.use(bodyParser.json({ limit: "50mb" }));
-  server.use(cors({ credentials: true, origin: process.env.API_URL }));
+  server.use(cors({ credentials: true, origin: ["http://localhost:5173", "http://localhost:3000"] }));
   server.use(express.urlencoded({ extended: true }));
   server.use(compression());
   server.use(cookieParser());
@@ -77,6 +78,8 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", blockStructEducationRoute);
   server.use("/api/dashboard", blockTeamEducationRoute);
   server.use("/api/dashboard", blockWhoTeachRoute);
+
+  server.use("/api", pageHomeRoute);
 
   try {
     databaseConnect()

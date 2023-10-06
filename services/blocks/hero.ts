@@ -13,7 +13,7 @@ class BlockHero implements IBlockService<IBlockHero> {
   }
 
   async update(data: IBlockHero) {
-    await BlockHeroModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockHeroModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block hero has updated",
     };
