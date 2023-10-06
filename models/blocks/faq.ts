@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
 import { baseSchema, IBlock } from "./base-model";
+import { BlocsEnum } from "./block-enum.type";
 
 export interface IFaq {
   heading: string;
@@ -23,6 +24,7 @@ const listFaqSchema = new mongoose.Schema({
 
 export const BlockFaqSchema = new Schema<IBlockFaq>({
   list_faq: [listFaqSchema],
+  block_name: { type: String, default: BlocsEnum.BlockFaq, immutable: true },
 });
 
 BlockFaqSchema.add(baseSchema);

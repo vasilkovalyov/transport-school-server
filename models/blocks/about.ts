@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import { baseSchema, IBlock } from "./base-model";
+import { BlocsEnum } from "./block-enum.type";
 
 export interface IBlockAbout extends IBlock {
   rich_text: string;
@@ -7,6 +8,7 @@ export interface IBlockAbout extends IBlock {
 
 export const BlockAboutSchema = new Schema<IBlockAbout>({
   rich_text: { type: String, default: null },
+  block_name: { type: String, default: BlocsEnum.BlockAbout, immutable: true },
 });
 
 BlockAboutSchema.add(baseSchema);

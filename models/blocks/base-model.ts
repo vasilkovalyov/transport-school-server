@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+import { BlocsEnum } from "./block-enum.type";
 
 export interface IBlock {
   _id: string;
   block_order: number;
   block_page: string;
+  block_name: BlocsEnum;
   heading: string;
   publish: boolean;
 }

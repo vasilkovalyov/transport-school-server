@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import { baseSchema, IBlock } from "./base-model";
+import { BlocsEnum } from "./block-enum.type";
 
 export interface IBlockSchedule extends IBlock {
   subheading: string;
@@ -10,6 +11,7 @@ export const BlockScheduleSchema = new Schema<IBlockSchedule>({
     type: String,
     default: null,
   },
+  block_name: { type: String, default: BlocsEnum.BlockSchedule, immutable: true },
 });
 
 BlockScheduleSchema.add(baseSchema);

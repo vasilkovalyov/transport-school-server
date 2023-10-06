@@ -1,6 +1,6 @@
-export { default as BlockAboutModel, type IBlockAbout } from "./about";
 export { default as BlockAboutCourseModel, type IBlockAboutCourse } from "./about-course";
 export { default as BlockAboutUsModel, type IBlockAboutUs } from "./about-us";
+export { default as BlockAboutModel, type IBlockAbout } from "./about";
 export { default as BlockAchivmentsModel, type IBlockAchivments } from "./achivments";
 export { default as BlockBenefitsModel, type IBlockBenefits } from "./benefits";
 export { default as BlockBlogModel, type IBlockBlog } from "./blog";

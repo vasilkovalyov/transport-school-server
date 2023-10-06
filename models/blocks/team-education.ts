@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
 import { baseSchema, IBlock } from "./base-model";
+import { BlocsEnum } from "./block-enum.type";
 
 export interface IBlockTeamEducation extends IBlock {
   subheading: string;
@@ -30,6 +31,7 @@ export const BlockTeamEducationSchema = new Schema<IBlockTeamEducation>({
   subheading: { type: String, default: null },
   list_education: [listEducationSchema],
   use_cta_link: { type: Boolean, default: null },
+  block_name: { type: String, default: BlocsEnum.BlockTeamEducation, immutable: true },
 });
 
 BlockTeamEducationSchema.add(baseSchema);

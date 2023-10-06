@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
 import { baseSchema, IBlock } from "./base-model";
+import { BlocsEnum } from "./block-enum.type";
 
 export interface IBlockAchivments extends IBlock {
   subheading: string;
@@ -23,6 +24,7 @@ const listAchivmentSchema = new mongoose.Schema({
 export const BlockAchivmentsSchema = new Schema<IBlockAchivments>({
   subheading: { type: String, default: null },
   list_achivments: [listAchivmentSchema],
+  block_name: { type: String, default: BlocsEnum.BlockAchivments, immutable: true },
 });
 
 BlockAchivmentsSchema.add(baseSchema);
