@@ -13,7 +13,7 @@ class BlockSchedule implements IBlockService<IBlockSchedule> {
   }
 
   async update(data: IBlockSchedule) {
-    await BlockScheduleModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockScheduleModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block schedule course has updated",
     };

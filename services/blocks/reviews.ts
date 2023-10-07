@@ -13,7 +13,7 @@ class BlockReviews implements IBlockService<IBlockReviews> {
   }
 
   async update(data: IBlockReviews) {
-    await BlockReviewsModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockReviewsModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block reviews course has updated",
     };

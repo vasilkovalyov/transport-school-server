@@ -13,7 +13,7 @@ class BlockContactForm implements IBlockService<IBlockContactForm> {
   }
 
   async update(data: IBlockContactForm) {
-    await BlockContactFormModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockContactFormModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block contact form course has updated",
     };

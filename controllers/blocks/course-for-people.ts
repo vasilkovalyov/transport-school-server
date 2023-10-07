@@ -25,7 +25,7 @@ class BlockCourseForPeopleController implements IBlockController {
 
   async update(req: Request, res: Response) {
     try {
-      const response = await this.blockCourseForPeopleService.update({ ...req.body, _id: req.params.id });
+      const response = await this.blockCourseForPeopleService.update(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;

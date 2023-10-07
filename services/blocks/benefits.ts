@@ -13,7 +13,7 @@ class BlockBenefits implements IBlockService<IBlockBenefits> {
   }
 
   async update(data: IBlockBenefits) {
-    await BlockBenefitsModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockBenefitsModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block benefits course has updated",
     };

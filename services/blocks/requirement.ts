@@ -13,7 +13,7 @@ class BlockRequirement implements IBlockService<IBlockRequirement> {
   }
 
   async update(data: IBlockRequirement) {
-    await BlockRequirementModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockRequirementModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block requirement course has updated",
     };

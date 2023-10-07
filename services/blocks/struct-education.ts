@@ -13,7 +13,7 @@ class BlockStructEducation implements IBlockService<IBlockStructEducation> {
   }
 
   async update(data: IBlockStructEducation) {
-    await BlockStructEducationModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockStructEducationModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block struct education course has updated",
     };

@@ -13,7 +13,7 @@ class BlockTeamEducation implements IBlockService<IBlockTeamEducation> {
   }
 
   async update(data: IBlockTeamEducation) {
-    await BlockTeamEducationModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockTeamEducationModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block team education course has updated",
     };

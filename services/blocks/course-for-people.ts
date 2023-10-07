@@ -13,7 +13,7 @@ class BlockCourseForPeople implements IBlockService<IBlockCourseForPeople> {
   }
 
   async update(data: IBlockCourseForPeople) {
-    await BlockCourseForPeopleModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockCourseForPeopleModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block contacts course has updated",
     };

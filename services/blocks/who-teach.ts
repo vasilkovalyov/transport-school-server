@@ -13,7 +13,7 @@ class BlockWhoTeach implements IBlockService<IBlockWhoTeach> {
   }
 
   async update(data: IBlockWhoTeach) {
-    await BlockWhoTeachModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockWhoTeachModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block who teach course has updated",
     };
