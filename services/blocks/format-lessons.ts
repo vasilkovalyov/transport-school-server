@@ -13,7 +13,7 @@ class BlockFormatLessons implements IBlockService<IBlockFormatLessons> {
   }
 
   async update(data: IBlockFormatLessons) {
-    await BlockFormatLessonsModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockFormatLessonsModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block format lessons course has updated",
     };

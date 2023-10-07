@@ -13,7 +13,7 @@ class BlockAboutCourse implements IBlockService<IBlockAboutCourse> {
   }
 
   async update(data: IBlockAboutCourse) {
-    await BlockAboutCourseModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    await BlockAboutCourseModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block about course has updated",
     };

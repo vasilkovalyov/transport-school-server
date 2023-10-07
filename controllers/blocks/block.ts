@@ -7,3 +7,5 @@ export interface IBlockController {
   publish: (req: Request, res: Response) => void;
   unpublish: (req: Request, res: Response) => void;
 }
+
+export interface IBlockShortController extends Pick<IBlockController, "publish" | "unpublish" | "getBlock"> {}

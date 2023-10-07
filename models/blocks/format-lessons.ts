@@ -3,11 +3,11 @@ import { baseSchema, IBlock } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
 export interface IBlockFormatLessons extends IBlock {
-  subheading: string;
+  rich_text: string;
 }
 
 export const BlockFormatLessonsSchema = new Schema<IBlockFormatLessons>({
-  subheading: { type: String, default: null },
+  rich_text: { type: String, default: null },
   block_name: { type: String, default: BlocsEnum.BlockFormatLessons, immutable: true },
 });
 

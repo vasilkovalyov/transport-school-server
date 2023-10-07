@@ -14,5 +14,11 @@ export const baseSchema = new mongoose.Schema({
   block_order: { type: Number, default: null },
   block_page: { type: String, default: null },
   heading: { type: String, required: true, unique: true },
-  publish: { type: Boolean, required: true, default: null },
+  publish: { type: Boolean, default: null },
+});
+
+export const shortSchema = new mongoose.Schema({
+  block_order: { type: Number, default: null },
+  block_page: { type: String, default: null },
+  publish: { type: Boolean, default: null },
 });

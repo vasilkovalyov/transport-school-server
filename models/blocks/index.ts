@@ -8,7 +8,6 @@ export { default as BlockContactFormModel, type IBlockContactForm } from "./cont
 export { default as BlockContactsModel, type IBlockContacts } from "./contacts";
 export { default as BlockCourseForPeopleModel, type IBlockCourseForPeople } from "./course-for-people";
 export { default as BlockCtaModel, type IBlockCta } from "./cta";
-export { default as BlockFaqModel, type IBlockFaq } from "./faq";
 export { default as BlockFormatLessonsModel, type IBlockFormatLessons } from "./format-lessons";
 export { default as BlockHeroModel, type IBlockHero } from "./hero";
 export { default as BlockRequirementModel, type IBlockRequirement } from "./requirement";
