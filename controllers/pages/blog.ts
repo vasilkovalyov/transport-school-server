@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import status from "../../utils/status";
 
-import { PageHomeService } from "../../services/pages";
+import { PageBlogService } from "../../services/pages";
 
-class HomeController {
+class BlogController {
   async getPage(req: Request, res: Response) {
-    const service = new PageHomeService();
+    const service = new PageBlogService();
     try {
       const response = await service.getPage();
       return res.status(status.SUCCESS).json(response);
@@ -18,4 +18,4 @@ class HomeController {
   }
 }
 
-export default HomeController;
+export default BlogController;

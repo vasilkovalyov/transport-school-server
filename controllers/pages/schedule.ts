@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import status from "../../utils/status";
 
-import { PageHomeService } from "../../services/pages";
+import { PageScheduleService } from "../../services/pages";
 
-class HomeController {
+class ScheduleController {
   async getPage(req: Request, res: Response) {
-    const service = new PageHomeService();
+    const service = new PageScheduleService();
     try {
       const response = await service.getPage();
       return res.status(status.SUCCESS).json(response);
@@ -18,4 +18,4 @@ class HomeController {
   }
 }
 
-export default HomeController;
+export default ScheduleController;

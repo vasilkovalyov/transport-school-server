@@ -30,6 +30,12 @@ import {
   blockTeamEducationRoute,
   blockWhoTeachRoute,
   pageHomeRoute,
+  pageAboutCourseRoute,
+  pageBlogRoute,
+  pageCompanyRoute,
+  pageContactRoute,
+  pagePriceRoute,
+  pageScheduleRoute,
 } from "./routes";
 
 import databaseConnect from "./database";
@@ -78,6 +84,12 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", blockWhoTeachRoute);
 
   server.use("/api", pageHomeRoute);
+  server.use("/api", pageAboutCourseRoute);
+  server.use("/api", pageBlogRoute);
+  server.use("/api", pageCompanyRoute);
+  server.use("/api", pageContactRoute);
+  server.use("/api", pagePriceRoute);
+  server.use("/api", pageScheduleRoute);
 
   try {
     databaseConnect()
