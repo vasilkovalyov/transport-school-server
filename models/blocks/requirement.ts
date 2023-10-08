@@ -3,7 +3,7 @@ import { baseSchema, IBlock } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
 export interface IBlockRequirement extends IBlock {
-  list_requirements: {
+  requirements_list: {
     heading: string;
     text: string;
   }[];
@@ -21,7 +21,7 @@ const listRequirementsSchema = new mongoose.Schema({
 });
 
 export const BlockRequirementsSchema = new Schema<IBlockRequirement>({
-  list_requirements: [listRequirementsSchema],
+  requirements_list: [listRequirementsSchema],
   block_name: { type: String, default: BlocsEnum.BlockRequirement, immutable: true },
 });
 
