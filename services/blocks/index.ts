@@ -13,7 +13,6 @@ export { default as BlockHeroService } from "./hero";
 export { default as BlockRequirementService } from "./requirement";
 export { default as BlockReviewsService } from "./reviews";
 export { default as BlockScheduleService } from "./schedule";
-export { default as BlockServicesService } from "./services";
 export { default as BlockStructEducationService } from "./struct-education";
 export { default as BlockTeamEducationService } from "./team-education";
 export { default as BlockWhoTeachService } from "./who-teach";

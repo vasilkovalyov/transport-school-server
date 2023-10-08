@@ -13,7 +13,6 @@ export { default as BlockHeroModel, type IBlockHero } from "./hero";
 export { default as BlockRequirementModel, type IBlockRequirement } from "./requirement";
 export { default as BlockReviewsModel, type IBlockReviews } from "./reviews";
 export { default as BlockScheduleModel, type IBlockSchedule } from "./schedule";
-export { default as BlockServicesModel, type IBlockServices } from "./services";
 export { default as BlockStructEducationModel, type IBlockStructEducation } from "./struct-education";
 export { default as BlockTeamEducationModel, type IBlockTeamEducation } from "./team-education";
 export { default as BlockWhoTeachModel, type IBlockWhoTeach } from "./who-teach";

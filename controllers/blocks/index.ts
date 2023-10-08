@@ -13,7 +13,6 @@ export { default as BlockHeroController } from "./hero";
 export { default as BlockRequirementController } from "./requirement";
 export { default as BlockReviewsController } from "./reviews";
 export { default as BlockScheduleController } from "./schedule";
-export { default as BlockServicesController } from "./services";
 export { default as BlockStructEducationController } from "./struct-education";
 export { default as BlockTeamEducationController } from "./team-education";
 export { default as BlockWhoTeachController } from "./who-teach";

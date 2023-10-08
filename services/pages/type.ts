@@ -14,7 +14,6 @@ import {
   IBlockRequirement,
   IBlockReviews,
   IBlockSchedule,
-  IBlockServices,
   IBlockStructEducation,
   IBlockTeamEducation,
   IBlockWhoTeach,
@@ -47,7 +46,6 @@ export type PageBodyProps =
   | IBlockRequirement
   | IBlockReviews
   | IBlockSchedule
-  | IBlockServices
   | IBlockStructEducation
   | IBlockTeamEducation
   | IBlockWhoTeach;

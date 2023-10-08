@@ -1,9 +1,8 @@
-import { BlockTeamEducation } from "./../../models/blocks/team-education";
 import {
   IBlockHero,
   BlockHeroModel,
-  IBlockServices,
-  BlockServicesModel,
+  IBlockFormatLessons,
+  BlockFormatLessonsModel,
   IBlockTeamEducation,
   BlockTeamEducationModel,
   IBlockRequirement,
@@ -15,14 +14,14 @@ class PagePriceService {
   async getPage(): Promise<IPage> {
     const page = "price";
     const blockHero = await BlockHeroModel.findOne({ block_page: page, publish: true });
-    const blockServices = await BlockServicesModel.findOne({ block_page: page, publish: true });
+    const blockFormatLessons = await BlockFormatLessonsModel.findOne({ block_page: page, publish: true });
     const blockTeamEducation = await BlockTeamEducationModel.findOne({ block_page: page, publish: true });
     const blockRequirement = await BlockRequirementModel.findOne({ block_page: page, publish: true });
 
     return {
       body: [
         blockHero as IBlockHero,
-        blockServices as IBlockServices,
+        blockFormatLessons as IBlockFormatLessons,
         blockTeamEducation as IBlockTeamEducation,
         blockRequirement as IBlockRequirement,
       ],

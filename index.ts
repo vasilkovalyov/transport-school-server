@@ -25,7 +25,6 @@ import {
   blockRequirementRoute,
   blockReviewsRoute,
   blockScheduleRoute,
-  blockServicesRoute,
   blockStructEducationRoute,
   blockTeamEducationRoute,
   blockWhoTeachRoute,
@@ -78,7 +77,6 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", blockRequirementRoute);
   server.use("/api/dashboard", blockReviewsRoute);
   server.use("/api/dashboard", blockScheduleRoute);
-  server.use("/api/dashboard", blockServicesRoute);
   server.use("/api/dashboard", blockStructEducationRoute);
   server.use("/api/dashboard", blockTeamEducationRoute);
   server.use("/api/dashboard", blockWhoTeachRoute);

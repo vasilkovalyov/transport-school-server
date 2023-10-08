@@ -13,7 +13,6 @@ export { default as blockHeroRoute } from "./hero";
 export { default as blockRequirementRoute } from "./requirement";
 export { default as blockReviewsRoute } from "./reviews";
 export { default as blockScheduleRoute } from "./schedule";
-export { default as blockServicesRoute } from "./services";
 export { default as blockStructEducationRoute } from "./struct-education";
 export { default as blockTeamEducationRoute } from "./team-education";
 export { default as blockWhoTeachRoute } from "./who-teach";
