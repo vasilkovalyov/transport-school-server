@@ -35,6 +35,7 @@ import {
   pageContactRoute,
   pagePriceRoute,
   pageScheduleRoute,
+  commonContactsRoute,
 } from "./routes";
 
 import databaseConnect from "./database";
@@ -80,6 +81,8 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", blockStructEducationRoute);
   server.use("/api/dashboard", blockTeamEducationRoute);
   server.use("/api/dashboard", blockWhoTeachRoute);
+
+  server.use("/api/dashboard", commonContactsRoute);
 
   server.use("/api", pageHomeRoute);
   server.use("/api", pageAboutCourseRoute);
