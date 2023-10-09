@@ -6,8 +6,8 @@ class CommonContactsService {
     const post = await CommonContactsModel.findOne();
 
     if (!post) {
-      const lesson_schedule = await new CommonContactsModel(data);
-      await lesson_schedule.save();
+      const contacts = await new CommonContactsModel(data);
+      await contacts.save();
       return {
         message: "Contacts has saved",
       };
@@ -27,8 +27,8 @@ class CommonContactsService {
     const post = await CommonContactsModel.findOne();
 
     if (!post) {
-      const lesson_schedule = await new CommonContactsModel(data);
-      await lesson_schedule.save();
+      const contacts = await new CommonContactsModel(data);
+      await contacts.save();
       return {
         message: "Social has saved",
       };

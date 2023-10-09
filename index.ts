@@ -14,7 +14,7 @@ import {
   dashboardCommonContactRoute,
 } from "./routes/dashboard";
 
-import { commonContactRoute } from "./routes/public";
+import { seoRoute, commonContactRoute } from "./routes/public";
 
 import {
   pageHomeRoute,
@@ -91,6 +91,7 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", blockStructEducationRoute);
   server.use("/api/dashboard", blockTeamEducationRoute);
   server.use("/api/dashboard", blockWhoTeachRoute);
+  server.use("/api", seoRoute);
 
   server.use("/api", pageHomeRoute);
   server.use("/api", pageAboutCourseRoute);
@@ -99,6 +100,7 @@ import databaseConnect from "./database";
   server.use("/api", pageContactRoute);
   server.use("/api", pagePriceRoute);
   server.use("/api", pageScheduleRoute);
+
   server.use("/api", commonContactRoute);
 
   try {
