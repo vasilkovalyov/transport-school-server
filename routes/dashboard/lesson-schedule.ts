@@ -1,6 +1,6 @@
 import express from "express";
-import { LessonScheduleController } from "../controllers";
-import authMiddleware from "../middlewares/auth";
+import { LessonScheduleController } from "../../controllers";
+import authMiddleware from "../../middlewares/auth";
 
 const router = express.Router();
 const lessonScheduleController = new LessonScheduleController();

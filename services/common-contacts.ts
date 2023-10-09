@@ -43,8 +43,17 @@ class CommonContactsService {
   }
 
   async getContacts() {
-    const contacts = await CommonContactsModel.findOne();
+    const contacts = await CommonContactsModel.findOne().select("address email phone");
+    return contacts;
+  }
 
+  async getSocials() {
+    const contacts = await CommonContactsModel.findOne().select("social_list");
+    return contacts;
+  }
+
+  async getFullContacts() {
+    const contacts = await CommonContactsModel.findOne();
     return contacts;
   }
 }

@@ -5,11 +5,28 @@ import compression from "compression";
 import cors from "cors";
 import dotenv from "dotenv";
 import fileUpload from "express-fileupload";
+
 import {
-  authRoute,
-  postRoute,
-  lessonScheduleRoute,
-  serviceRoute,
+  dashboardAuthRoute,
+  dashboardPostRoute,
+  dashboardLessonScheduleRoute,
+  dashboardServiceRoute,
+  dashboardCommonContactRoute,
+} from "./routes/dashboard";
+
+import { commonContactRoute } from "./routes/public";
+
+import {
+  pageHomeRoute,
+  pageAboutCourseRoute,
+  pageBlogRoute,
+  pageCompanyRoute,
+  pageContactRoute,
+  pagePriceRoute,
+  pageScheduleRoute,
+} from "./routes/pages";
+
+import {
   blockAboutRoute,
   blockAboutCourseRoute,
   blockAboutUsRoute,
@@ -28,15 +45,7 @@ import {
   blockStructEducationRoute,
   blockTeamEducationRoute,
   blockWhoTeachRoute,
-  pageHomeRoute,
-  pageAboutCourseRoute,
-  pageBlogRoute,
-  pageCompanyRoute,
-  pageContactRoute,
-  pagePriceRoute,
-  pageScheduleRoute,
-  commonContactsRoute,
-} from "./routes";
+} from "./routes/blocks";
 
 import databaseConnect from "./database";
 
@@ -58,10 +67,11 @@ import databaseConnect from "./database";
     }),
   );
 
-  server.use("/api/dashboard", authRoute);
-  server.use("/api/dashboard", postRoute);
-  server.use("/api/dashboard", serviceRoute);
-  server.use("/api/dashboard", lessonScheduleRoute);
+  server.use("/api/dashboard", dashboardAuthRoute);
+  server.use("/api/dashboard", dashboardPostRoute);
+  server.use("/api/dashboard", dashboardServiceRoute);
+  server.use("/api/dashboard", dashboardLessonScheduleRoute);
+  server.use("/api/dashboard", dashboardCommonContactRoute);
 
   server.use("/api/dashboard", blockAboutRoute);
   server.use("/api/dashboard", blockAboutCourseRoute);
@@ -82,8 +92,6 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", blockTeamEducationRoute);
   server.use("/api/dashboard", blockWhoTeachRoute);
 
-  server.use("/api/dashboard", commonContactsRoute);
-
   server.use("/api", pageHomeRoute);
   server.use("/api", pageAboutCourseRoute);
   server.use("/api", pageBlogRoute);
@@ -91,6 +99,7 @@ import databaseConnect from "./database";
   server.use("/api", pageContactRoute);
   server.use("/api", pagePriceRoute);
   server.use("/api", pageScheduleRoute);
+  server.use("/api", commonContactRoute);
 
   try {
     databaseConnect()

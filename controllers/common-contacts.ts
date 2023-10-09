@@ -44,6 +44,30 @@ class CommonContactsController {
       });
     }
   }
+
+  async getSocials(req: Request, res: Response) {
+    try {
+      const response = await this.service.getSocials();
+      return res.status(status.SUCCESS).json(response);
+    } catch (e) {
+      if (!(e instanceof Error)) return;
+      return res.status(status.BAD_REQUEST).json({
+        error: e.message,
+      });
+    }
+  }
+
+  async getFullContacts(req: Request, res: Response) {
+    try {
+      const response = await this.service.getFullContacts();
+      return res.status(status.SUCCESS).json(response);
+    } catch (e) {
+      if (!(e instanceof Error)) return;
+      return res.status(status.BAD_REQUEST).json({
+        error: e.message,
+      });
+    }
+  }
 }
 
 export default CommonContactsController;
