@@ -13,7 +13,7 @@ export interface IBlock {
 export const baseSchema = new mongoose.Schema({
   block_order: { type: Number, default: null },
   block_page: { type: String, default: null },
-  heading: { type: String, required: true, unique: true },
+  heading: { type: String, required: true },
   publish: { type: Boolean, default: null },
 });
 

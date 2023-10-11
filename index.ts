@@ -14,7 +14,7 @@ import {
   dashboardCommonContactRoute,
 } from "./routes/dashboard";
 
-import { seoRoute, commonContactRoute } from "./routes/public";
+import { seoRoute, commonContactRoute, reviewRoute } from "./routes/public";
 
 import {
   pageHomeRoute,
@@ -25,6 +25,14 @@ import {
   pagePriceRoute,
   pageScheduleRoute,
 } from "./routes/pages";
+
+import {
+  reuseBlockAchivmentsRoute,
+  reuseBlockContactsRoute,
+  reuseBlockCtaRoute,
+  reuseBlockFaqRoute,
+  reuseBlockReviewRoute,
+} from "./routes/reuse-blocks";
 
 import {
   blockAboutRoute,
@@ -91,7 +99,15 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", blockStructEducationRoute);
   server.use("/api/dashboard", blockTeamEducationRoute);
   server.use("/api/dashboard", blockWhoTeachRoute);
+
+  server.use("/api/dashboard", reuseBlockAchivmentsRoute);
+  server.use("/api/dashboard", reuseBlockContactsRoute);
+  server.use("/api/dashboard", reuseBlockCtaRoute);
+  server.use("/api/dashboard", reuseBlockFaqRoute);
+  server.use("/api/dashboard", reuseBlockReviewRoute);
+
   server.use("/api", seoRoute);
+  server.use("/api", reviewRoute);
 
   server.use("/api", pageHomeRoute);
   server.use("/api", pageAboutCourseRoute);

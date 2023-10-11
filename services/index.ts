@@ -7,4 +7,5 @@ export { default as LessonScheduleService } from "./lesson-schedule";
 export { default as CommonContactsService } from "./common-contacts";
 
 export * from "./blocks";
+export * from "./reuse-blocks";
 export * from "./pages";

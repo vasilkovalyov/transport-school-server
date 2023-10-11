@@ -20,4 +20,5 @@ export enum BlocsEnum {
   BlockReview = "BlockReview",
   BlockBlog = "BlockBlog",
   BlockContact = "BlockContact",
+  BlockFaq = "BlockFaq",
 }

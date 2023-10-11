@@ -5,4 +5,5 @@ export { default as LessonScheduleController } from "./lesson-schedule";
 export { default as CommonContactsController } from "./common-contacts";
 
 export * from "./blocks";
+export * from "./reuse-blocks";
 export * from "./pages";
