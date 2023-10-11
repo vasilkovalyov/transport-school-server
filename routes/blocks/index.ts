@@ -8,6 +8,7 @@ export { default as blockContactFormRoute } from "./contact-form";
 export { default as blockContactsRoute } from "./contacts";
 export { default as blockCourseForPeopleRoute } from "./course-for-people";
 export { default as blockCtaRoute } from "./cta";
+export { default as blockFaqRoute } from "./faq";
 export { default as blockFormatLessonsRoute } from "./format-lessons";
 export { default as blockHeroRoute } from "./hero";
 export { default as blockRequirementRoute } from "./requirement";

@@ -10,6 +10,8 @@ export interface IBlock {
   publish: boolean;
 }
 
+export type IBlockСutDown = Omit<IBlock, "heading">;
+
 export const baseSchema = new mongoose.Schema({
   block_order: { type: Number, default: null },
   block_page: { type: String, default: null },

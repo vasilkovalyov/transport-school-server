@@ -1,5 +1,6 @@
 import { IBlockService } from "./block";
 import { BlockReviewsModel, IBlockReviews } from "../../models";
+import { ReuseBlockReviewModel } from "../../models/reuse-blocks";
 
 class BlockReviews implements IBlockService<IBlockReviews> {
   async create(data: IBlockReviews) {
@@ -30,7 +31,14 @@ class BlockReviews implements IBlockService<IBlockReviews> {
   }
 
   async getBlock(page: string) {
+    const faqReuseBlock = await ReuseBlockReviewModel.findOne();
+    if (!faqReuseBlock) {
+      return null;
+    }
+
     const post = await BlockReviewsModel.findOne({ block_page: page });
+    if (!post) return false;
+
     return post;
   }
 }

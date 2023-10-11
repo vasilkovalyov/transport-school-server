@@ -1,5 +1,6 @@
 import { IBlockService } from "./block";
 import { BlockCtaModel, IBlockCta } from "../../models";
+import { ReuseBlockCtaModel } from "../../models/reuse-blocks";
 
 class BlockCta implements IBlockService<IBlockCta> {
   async create(data: IBlockCta) {
@@ -30,7 +31,14 @@ class BlockCta implements IBlockService<IBlockCta> {
   }
 
   async getBlock(page: string) {
+    const ctaReuseBlock = await ReuseBlockCtaModel.findOne();
+    if (!ctaReuseBlock) {
+      return null;
+    }
+
     const post = await BlockCtaModel.findOne({ block_page: page });
+    if (!post) return false;
+
     return post;
   }
 }

@@ -9,13 +9,13 @@ export interface IReuseBlockCta {
   block_name: ReuseBlocsEnum;
 }
 
-export const BlockCtaSchema = new Schema<IReuseBlockCta>({
+export const ReuseBlockCtaSchema = new Schema<IReuseBlockCta>({
   heading: { type: String, required: true },
   use_link_to_contact_page: { type: Boolean, default: false },
   use_phone_cta: { type: Boolean, default: false },
   block_name: { type: String, default: ReuseBlocsEnum.ReuseBlockCta, immutable: true },
 });
 
-export const BlockCta = model("ReuseBlockCta", BlockCtaSchema);
+export const ReuseBlockCta = model("ReuseBlockCta", ReuseBlockCtaSchema);
 
-export default BlockCta;
+export default ReuseBlockCta;

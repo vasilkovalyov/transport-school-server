@@ -45,6 +45,7 @@ import {
   blockContactsRoute,
   blockCourseForPeopleRoute,
   blockCtaRoute,
+  blockFaqRoute,
   blockFormatLessonsRoute,
   blockHeroRoute,
   blockRequirementRoute,
@@ -91,6 +92,7 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", blockContactsRoute);
   server.use("/api/dashboard", blockCourseForPeopleRoute);
   server.use("/api/dashboard", blockCtaRoute);
+  server.use("/api/dashboard", blockFaqRoute);
   server.use("/api/dashboard", blockFormatLessonsRoute);
   server.use("/api/dashboard", blockHeroRoute);
   server.use("/api/dashboard", blockRequirementRoute);

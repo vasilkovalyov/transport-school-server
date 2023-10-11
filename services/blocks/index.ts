@@ -8,6 +8,7 @@ export { default as BlockContactFormService } from "./contact-form";
 export { default as BlockContactsService } from "./contacts";
 export { default as BlockCourseForPeopleService } from "./course-for-people";
 export { default as BlockCtaService } from "./cta";
+export { default as BlockFaqService } from "./faq";
 export { default as BlockFormatLessonsService } from "./format-lessons";
 export { default as BlockHeroService } from "./hero";
 export { default as BlockRequirementService } from "./requirement";

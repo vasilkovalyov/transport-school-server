@@ -8,6 +8,7 @@ export { default as BlockContactFormController } from "./contact-form";
 export { default as BlockContactsController } from "./contacts";
 export { default as BlockCourseForPeopleController } from "./course-for-people";
 export { default as BlockCtaController } from "./cta";
+export { default as BlockFaqController } from "./faq";
 export { default as BlockFormatLessonsController } from "./format-lessons";
 export { default as BlockHeroController } from "./hero";
 export { default as BlockRequirementController } from "./requirement";

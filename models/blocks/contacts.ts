@@ -1,23 +1,14 @@
 import { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { shortSchema, IBlockСutDown } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockContacts extends IBlock {
-  address: string;
-  phone: string;
-  email: string;
-  map_link_url: string;
-}
+export interface IBlockContacts extends IBlockСutDown {}
 
 export const BlockContactsSchema = new Schema<IBlockContacts>({
-  address: { type: String, default: null },
-  phone: { type: String, default: null },
-  email: { type: String, default: null },
-  map_link_url: { type: String, default: null },
   block_name: { type: String, default: BlocsEnum.BlockContact, immutable: true },
 });
 
-BlockContactsSchema.add(baseSchema);
+BlockContactsSchema.add(shortSchema);
 
 export const BlockContacts = model("BlockContacts", BlockContactsSchema);
 

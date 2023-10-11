@@ -1,5 +1,6 @@
 import { IBlockService } from "./block";
 import { BlockAchivmentsModel, IBlockAchivments } from "../../models";
+import { ReuseBlockAchivmentModel } from "../../models/reuse-blocks";
 
 class BlockAchivments implements IBlockService<IBlockAchivments> {
   async create(data: IBlockAchivments) {
@@ -30,7 +31,14 @@ class BlockAchivments implements IBlockService<IBlockAchivments> {
   }
 
   async getBlock(page: string) {
+    const achivmentsReuseBlock = await ReuseBlockAchivmentModel.findOne();
+    if (!achivmentsReuseBlock) {
+      return null;
+    }
+
     const post = await BlockAchivmentsModel.findOne({ block_page: page });
+    if (!post) return false;
+
     return post;
   }
 }

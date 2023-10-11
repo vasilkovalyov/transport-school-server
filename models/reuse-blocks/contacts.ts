@@ -11,7 +11,7 @@ export interface IReuseBlockContacts {
   block_name: ReuseBlocsEnum;
 }
 
-export const BlockContactsSchema = new Schema<IReuseBlockContacts>({
+export const ReuseBlockContactsSchema = new Schema<IReuseBlockContacts>({
   heading: { type: String, required: true },
   address: { type: String, default: null },
   phone: { type: String, default: null },
@@ -20,6 +20,6 @@ export const BlockContactsSchema = new Schema<IReuseBlockContacts>({
   block_name: { type: String, default: ReuseBlocsEnum.ReuseBlockContacts, immutable: true },
 });
 
-export const BlockContacts = model("ReuseBlockContacts", BlockContactsSchema);
+export const ReuseBlockContacts = model("ReuseBlockContacts", ReuseBlockContactsSchema);
 
-export default BlockContacts;
+export default ReuseBlockContacts;

@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
 import status from "../../utils/status";
-import { BlockReviewsService } from "../../services";
+import { BlockFaqService } from "../../services";
 
 import { IBlockController } from "./block";
 
-class BlockReviewsController implements IBlockController {
-  blockReviewsService: BlockReviewsService;
+class BlockFaqController implements IBlockController {
+  blockFaqService: BlockFaqService;
 
   constructor() {
-    this.blockReviewsService = new BlockReviewsService();
+    this.blockFaqService = new BlockFaqService();
   }
 
   async create(req: Request, res: Response) {
     try {
-      const response = await this.blockReviewsService.create(req.body);
+      const response = await this.blockFaqService.create(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -25,7 +25,7 @@ class BlockReviewsController implements IBlockController {
 
   async update(req: Request, res: Response) {
     try {
-      const response = await this.blockReviewsService.update(req.body);
+      const response = await this.blockFaqService.update(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -39,7 +39,7 @@ class BlockReviewsController implements IBlockController {
     try {
       const { page } = req.params;
 
-      const response = await this.blockReviewsService.getBlock(page);
+      const response = await this.blockFaqService.getBlock(page);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -53,7 +53,7 @@ class BlockReviewsController implements IBlockController {
     try {
       const { page } = req.body;
 
-      const response = await this.blockReviewsService.publish(page);
+      const response = await this.blockFaqService.publish(page);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -67,7 +67,7 @@ class BlockReviewsController implements IBlockController {
     try {
       const { page } = req.body;
 
-      const response = await this.blockReviewsService.unpublish(page);
+      const response = await this.blockFaqService.unpublish(page);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -78,4 +78,4 @@ class BlockReviewsController implements IBlockController {
   }
 }
 
-export default BlockReviewsController;
+export default BlockFaqController;

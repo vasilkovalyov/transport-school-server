@@ -1,5 +1,6 @@
 import { IBlockService } from "./block";
 import { BlockContactsModel, IBlockContacts } from "../../models";
+import { ReuseBlockContactsModel } from "../../models/reuse-blocks";
 
 class BlockContacts implements IBlockService<IBlockContacts> {
   async create(data: IBlockContacts) {
@@ -30,7 +31,14 @@ class BlockContacts implements IBlockService<IBlockContacts> {
   }
 
   async getBlock(page: string) {
+    const contactsReuseBlock = await ReuseBlockContactsModel.findOne();
+    if (!contactsReuseBlock) {
+      return null;
+    }
+
     const post = await BlockContactsModel.findOne({ block_page: page });
+    if (!post) return false;
+
     return post;
   }
 }
