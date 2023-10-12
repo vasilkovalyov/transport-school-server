@@ -1,14 +1,19 @@
-import { IBlockHero, BlockHeroModel, IBlockBlog, BlockBlogModel } from "../../models";
+import { BlockHeroModel, BlockBlogModel } from "../../models";
+import { getBlockCtaPublicData } from "../public/reuse-blocks";
+
 import { IPage } from "./type";
 
 class PageBlogService {
   async getPage(): Promise<IPage> {
     const page = "blog";
-    const blockHero = await BlockHeroModel.findOne({ block_page: page, publish: true });
-    const blockBlog = await BlockBlogModel.findOne({ block_page: page, publish: true });
+    const params = { block_page: page, publish: true };
+    const blockHero = await BlockHeroModel.findOne(params);
+    const blockBlog = await BlockBlogModel.findOne(params);
+
+    const blockCtaData = await getBlockCtaPublicData(page);
 
     return {
-      body: [blockHero as IBlockHero, blockBlog as IBlockBlog],
+      body: [blockHero, blockBlog, blockCtaData],
     };
   }
 }

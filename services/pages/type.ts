@@ -50,4 +50,5 @@ export type PageBodyProps =
   | IBlockSchedule
   | IBlockStructEducation
   | IBlockTeamEducation
-  | IBlockWhoTeach;
+  | IBlockWhoTeach
+  | unknown;

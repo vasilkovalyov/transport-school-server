@@ -1,30 +1,21 @@
-import {
-  IBlockHero,
-  BlockHeroModel,
-  IBlockAboutUs,
-  BlockAboutUsModel,
-  IBlockAboutCourse,
-  BlockAboutCourseModel,
-  IBlockFormatLessons,
-  BlockFormatLessonsModel,
-} from "../../models";
+import { BlockHeroModel, BlockAboutUsModel, BlockAboutCourseModel, BlockFormatLessonsModel } from "../../models";
+import { getBlockFaqPublicData, getBlockAchivmentsPublicData } from "../public/reuse-blocks";
 import { IPage } from "./type";
 
 class PageHomeService {
   async getPage(): Promise<IPage> {
     const page = "home";
-    const blockHero = await BlockHeroModel.findOne({ block_page: page, publish: true });
-    const blockAboutUs = await BlockAboutUsModel.findOne({ block_page: page, publish: true });
-    const blockAbouCourse = await BlockAboutCourseModel.findOne({ block_page: page, publish: true });
-    const blockFormatLessons = await BlockFormatLessonsModel.findOne({ block_page: page, publish: true });
+    const params = { block_page: page, publish: true };
+    const blockHero = await BlockHeroModel.findOne(params);
+    const blockAboutUs = await BlockAboutUsModel.findOne(params);
+    const blockAbouCourse = await BlockAboutCourseModel.findOne(params);
+    const blockFormatLessons = await BlockFormatLessonsModel.findOne(params);
+
+    const blockFaqData = await getBlockFaqPublicData(page);
+    const blockAchivmentsData = await getBlockAchivmentsPublicData(page);
 
     return {
-      body: [
-        blockHero as IBlockHero,
-        blockAboutUs as IBlockAboutUs,
-        blockAbouCourse as IBlockAboutCourse,
-        blockFormatLessons as IBlockFormatLessons,
-      ],
+      body: [blockHero, blockAboutUs, blockAbouCourse, blockFormatLessons, blockFaqData, blockAchivmentsData],
     };
   }
 }

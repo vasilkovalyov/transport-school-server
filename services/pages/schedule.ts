@@ -1,14 +1,19 @@
-import { IBlockHero, BlockHeroModel, IBlockSchedule, BlockScheduleModel } from "../../models";
+import { BlockHeroModel, BlockScheduleModel } from "../../models";
+import { getBlockContactsPublicData } from "../public/reuse-blocks";
+
 import { IPage } from "./type";
 
 class PageScheduleService {
   async getPage(): Promise<IPage> {
     const page = "schedule";
-    const blockHero = await BlockHeroModel.findOne({ block_page: page, publish: true });
-    const blockSchedule = await BlockScheduleModel.findOne({ block_page: page, publish: true });
+    const params = { block_page: page, publish: true };
+    const blockHero = await BlockHeroModel.findOne(params);
+    const blockSchedule = await BlockScheduleModel.findOne(params);
+
+    const blockContactsData = await getBlockContactsPublicData(page);
 
     return {
-      body: [blockHero as IBlockHero, blockSchedule as IBlockSchedule],
+      body: [blockHero, blockSchedule, blockContactsData],
     };
   }
 }

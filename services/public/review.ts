@@ -1,4 +1,3 @@
-import { Response } from "express";
 import { IReview, ReviewModel } from "../../models/public";
 
 class ReviewService {
