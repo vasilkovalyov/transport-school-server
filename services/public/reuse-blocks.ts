@@ -4,6 +4,7 @@ import {
   BlockCtaModel,
   BlockContactsModel,
   BlockReviewsModel,
+  BlockBlogModel,
 } from "../../models";
 
 import {
@@ -15,6 +16,7 @@ import {
 } from "../../models/reuse-blocks";
 
 import { ReviewModel } from "../../models/public";
+import PostService from "../post";
 
 export async function getBlockFaqPublicData(page: string) {
   const block = await BlockFaqModel.findOne({ block_page: page, publish: true }).select(
@@ -88,7 +90,11 @@ export async function getBlockCtaPublicData(page: string) {
       use_link_to_contact_page: reuseBlock?.use_link_to_contact_page,
       use_phone_cta: reuseBlock?.use_phone_cta,
     };
+
+    return blockData;
   }
+
+  return null;
 }
 
 export async function getBlockContactsPublicData(page: string) {
@@ -113,7 +119,10 @@ export async function getBlockContactsPublicData(page: string) {
       email: reuseBlock?.email,
       map_url: reuseBlock?.map_url,
     };
+    return blockData;
   }
+
+  return null;
 }
 
 export async function getBlockReviewsPublicData(page: string) {
@@ -136,5 +145,33 @@ export async function getBlockReviewsPublicData(page: string) {
       heading: reuseBlock?.heading,
       reviews: reviews,
     };
+    return blockData;
   }
+
+  return null;
+}
+
+export async function getBlockBlogPublicData(page: string, pageNumber: number = 1) {
+  const blockBlog = await BlockBlogModel.findOne({ block_page: page, publish: true });
+  const postService = new PostService();
+  let blockData: unknown = null;
+
+  if (blockBlog) {
+    const responsePosts = await postService.getPaginatedPosts(blockBlog.post_number || 3, pageNumber);
+
+    blockData = {
+      _id: blockBlog._id,
+      post_number: blockBlog.post_number,
+      block_name: blockBlog.block_name,
+      block_order: blockBlog.block_order,
+      block_page: blockBlog.block_page,
+      heading: blockBlog.heading,
+      publish: blockBlog.publish,
+      posts: responsePosts.posts,
+      next_page: responsePosts.next_page,
+    };
+    return blockData;
+  }
+
+  return null;
 }

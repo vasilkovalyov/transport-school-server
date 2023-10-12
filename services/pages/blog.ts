@@ -1,5 +1,5 @@
-import { BlockHeroModel, BlockBlogModel } from "../../models";
-import { getBlockCtaPublicData } from "../public/reuse-blocks";
+import { BlockHeroModel } from "../../models";
+import { getBlockCtaPublicData, getBlockBlogPublicData } from "../public/reuse-blocks";
 
 import { IPage } from "./type";
 
@@ -8,12 +8,12 @@ class PageBlogService {
     const page = "blog";
     const params = { block_page: page, publish: true };
     const blockHero = await BlockHeroModel.findOne(params);
-    const blockBlog = await BlockBlogModel.findOne(params);
 
+    const blockBlogData = await getBlockBlogPublicData(page);
     const blockCtaData = await getBlockCtaPublicData(page);
 
     return {
-      body: [blockHero, blockBlog, blockCtaData],
+      body: [blockHero, blockBlogData, blockCtaData],
     };
   }
 }

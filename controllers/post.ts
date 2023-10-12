@@ -23,7 +23,7 @@ class PostController {
 
   async update(req: Request, res: Response) {
     try {
-      const response = await this.postService.update({ ...req.body, _id: req.params.id });
+      const response = await this.postService.update(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -63,8 +63,8 @@ class PostController {
 
   async getPaginatedPosts(req: Request, res: Response) {
     try {
-      const { size, page } = req.body;
-      const response = await this.postService.getPaginatedPosts(size, page);
+      const { size, page } = req.query as unknown as { size: string; page: string };
+      const response = await this.postService.getPaginatedPosts(parseInt(size), parseInt(page));
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;

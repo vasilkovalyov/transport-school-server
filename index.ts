@@ -14,7 +14,7 @@ import {
   dashboardCommonContactRoute,
 } from "./routes/dashboard";
 
-import { seoRoute, commonContactRoute, reviewRoute } from "./routes/public";
+import { seoRoute, commonContactRoute, reviewRoute, postsRoute } from "./routes/public";
 
 import {
   pageHomeRoute,
@@ -110,6 +110,7 @@ import databaseConnect from "./database";
 
   server.use("/api", seoRoute);
   server.use("/api", reviewRoute);
+  server.use("/api", postsRoute);
 
   server.use("/api", pageHomeRoute);
   server.use("/api", pageAboutCourseRoute);
