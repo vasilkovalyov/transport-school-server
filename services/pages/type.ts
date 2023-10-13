@@ -18,6 +18,7 @@ import {
   IBlockTeamEducation,
   IBlockWhoTeach,
   ICommonContacts,
+  IPost,
 } from "../../models";
 
 export interface ISeo {
@@ -30,6 +31,14 @@ export interface IPage {
   seo?: ISeo;
   body?: PageBodyProps[];
   contacts?: ICommonContacts;
+}
+
+export interface ISingleBlog {
+  post: IPost;
+  blockRelatedPosts?: {
+    posts: IPost[];
+  };
+  blockCta?: IBlockCta;
 }
 
 export type PageBodyProps =

@@ -5,6 +5,7 @@ import {
   BlockContactsModel,
   BlockReviewsModel,
   BlockBlogModel,
+  CommonContactsModel,
 } from "../../models";
 
 import {
@@ -75,6 +76,8 @@ export async function getBlockCtaPublicData(page: string) {
     "_id block_name block_order block_page publish",
   );
 
+  const contactsData = await CommonContactsModel.findOne();
+
   let blockData: unknown = null;
 
   if (block) {
@@ -89,6 +92,7 @@ export async function getBlockCtaPublicData(page: string) {
       heading: reuseBlock?.heading,
       use_link_to_contact_page: reuseBlock?.use_link_to_contact_page,
       use_phone_cta: reuseBlock?.use_phone_cta,
+      phone: contactsData?.phone,
     };
 
     return blockData;

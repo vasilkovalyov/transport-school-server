@@ -35,7 +35,10 @@ class PostService {
   async getPaginatedPosts(size: number, page: number) {
     const total_count = await PostModel.countDocuments();
     const { nextPage, total_pages, skip_size } = getPaginationInfo(size, page, total_count);
-    const posts = await PostModel.find().skip(skip_size).limit(size).exec();
+    const posts = await PostModel.find({}, null, { sort: { date: -1 } })
+      .skip(skip_size)
+      .limit(size)
+      .exec();
 
     return {
       total_count,
@@ -48,6 +51,11 @@ class PostService {
 
   async getPost(id: string) {
     const post = await PostModel.findById(id);
+    return post;
+  }
+
+  async getPostBySlug(slug: string) {
+    const post = await PostModel.findOne({ slug: slug });
     return post;
   }
 }

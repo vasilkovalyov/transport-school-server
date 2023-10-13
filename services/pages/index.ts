@@ -5,3 +5,4 @@ export { default as PageCompanyService } from "./company";
 export { default as PageContactService } from "./contact";
 export { default as PagePriceService } from "./price";
 export { default as PageScheduleService } from "./schedule";
+export { default as PageBlogSingleService } from "./blog-single";

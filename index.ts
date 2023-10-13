@@ -24,6 +24,7 @@ import {
   pageContactRoute,
   pagePriceRoute,
   pageScheduleRoute,
+  pageBlogSingleRoute,
 } from "./routes/pages";
 
 import {
@@ -119,6 +120,7 @@ import databaseConnect from "./database";
   server.use("/api", pageContactRoute);
   server.use("/api", pagePriceRoute);
   server.use("/api", pageScheduleRoute);
+  server.use("/api", pageBlogSingleRoute);
 
   server.use("/api", commonContactRoute);
 

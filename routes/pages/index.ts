@@ -5,3 +5,4 @@ export { default as pageCompanyRoute } from "./company";
 export { default as pageContactRoute } from "./contact";
 export { default as pagePriceRoute } from "./price";
 export { default as pageScheduleRoute } from "./schedule";
+export { default as pageBlogSingleRoute } from "./blog-single";

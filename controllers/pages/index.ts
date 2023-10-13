@@ -5,3 +5,4 @@ export { default as PageCompanyController } from "./company";
 export { default as PageContactController } from "./contact";
 export { default as PagePriceController } from "./price";
 export { default as PageScheduleController } from "./schedule";
+export { default as PageBlogSingleController } from "./blog-single";
