@@ -4,7 +4,7 @@ import { BlocsEnum } from "./block-enum.type";
 
 export interface IBlockSchedule extends IBlock {
   subheading: string;
-  schedule_number: number;
+  post_number: number;
 }
 
 export const BlockScheduleSchema = new Schema<IBlockSchedule>({
@@ -12,7 +12,7 @@ export const BlockScheduleSchema = new Schema<IBlockSchedule>({
     type: String,
     default: null,
   },
-  schedule_number: { type: Number, default: null },
+  post_number: { type: Number, default: null },
   block_name: { type: String, default: BlocsEnum.BlockSchedule, immutable: true },
 });
 

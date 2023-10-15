@@ -1,5 +1,5 @@
-import { BlockHeroModel, BlockScheduleModel } from "../../models";
-import { getBlockContactsPublicData } from "../public/reuse-blocks";
+import { BlockHeroModel } from "../../models";
+import { getBlockContactsPublicData, getBlockLessonSchedulesPublicData } from "../public/reuse-blocks";
 
 import { IPage } from "./type";
 
@@ -8,12 +8,12 @@ class PageScheduleService {
     const page = "schedule";
     const params = { block_page: page, publish: true };
     const blockHero = await BlockHeroModel.findOne(params);
-    const blockSchedule = await BlockScheduleModel.findOne(params);
 
+    const blockScheduleData = await getBlockLessonSchedulesPublicData(page);
     const blockContactsData = await getBlockContactsPublicData(page);
 
     return {
-      body: [blockHero, blockSchedule, blockContactsData],
+      body: [blockHero, blockScheduleData, blockContactsData],
     };
   }
 }

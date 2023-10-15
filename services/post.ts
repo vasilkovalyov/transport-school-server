@@ -35,7 +35,7 @@ class PostService {
   async getPaginatedPosts(size: number, page: number) {
     const total_count = await PostModel.countDocuments();
     const { nextPage, total_pages, skip_size } = getPaginationInfo(size, page, total_count);
-    const posts = await PostModel.find({}, null, { sort: { date: -1 } })
+    const posts = await PostModel.find({}, null, { sort: { createdAt: -1 } })
       .skip(skip_size)
       .limit(size)
       .exec();

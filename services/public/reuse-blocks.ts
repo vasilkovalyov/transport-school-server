@@ -6,6 +6,7 @@ import {
   BlockReviewsModel,
   BlockBlogModel,
   CommonContactsModel,
+  LessonScheduleModel,
 } from "../../models";
 
 import {
@@ -16,8 +17,11 @@ import {
   ReuseBlockReviewModel,
 } from "../../models/reuse-blocks";
 
+import { BlockScheduleModel } from "../../models/blocks";
+
 import { ReviewModel } from "../../models/public";
 import PostService from "../post";
+import LessonScheduleService from "../lesson-schedule";
 
 export async function getBlockFaqPublicData(page: string) {
   const block = await BlockFaqModel.findOne({ block_page: page, publish: true }).select(
@@ -171,6 +175,34 @@ export async function getBlockBlogPublicData(page: string, pageNumber: number = 
       block_page: blockBlog.block_page,
       heading: blockBlog.heading,
       publish: blockBlog.publish,
+      posts: responsePosts.posts,
+      next_page: responsePosts.next_page,
+    };
+    return blockData;
+  }
+
+  return null;
+}
+
+export async function getBlockLessonSchedulesPublicData(page: string, pageNumber: number = 1) {
+  const blockScheduleLesson = await BlockScheduleModel.findOne({ block_page: page, publish: true });
+  const lessonScheduleService = new LessonScheduleService();
+  let blockData: unknown = null;
+
+  if (blockScheduleLesson) {
+    const responsePosts = await lessonScheduleService.getPaginatedPosts(
+      blockScheduleLesson.post_number || 3,
+      pageNumber,
+    );
+
+    blockData = {
+      _id: blockScheduleLesson._id,
+      post_number: blockScheduleLesson.post_number,
+      block_name: blockScheduleLesson.block_name,
+      block_order: blockScheduleLesson.block_order,
+      block_page: blockScheduleLesson.block_page,
+      heading: blockScheduleLesson.heading,
+      publish: blockScheduleLesson.publish,
       posts: responsePosts.posts,
       next_page: responsePosts.next_page,
     };

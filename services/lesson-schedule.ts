@@ -1,4 +1,5 @@
 import { ILessonSchedule, LessonScheduleModel } from "../models";
+import { getPaginationInfo } from "../utils/pagination";
 
 class LessonScheduleService {
   async create(data: ILessonSchedule) {
@@ -32,16 +33,31 @@ class LessonScheduleService {
   }
 
   async getLessonSchedules() {
-    const lessonSchedules = await LessonScheduleModel.find();
+    const lessonSchedules = await LessonScheduleModel.find({}, null, { sort: { date_start_event: 1 } });
 
-    return {
-      lesson_schedules: lessonSchedules,
-    };
+    return lessonSchedules;
   }
 
   async getLessonSchedule(id: string) {
-    const lesson_schedules = await LessonScheduleModel.findById(id);
+    const lesson_schedules = await LessonScheduleModel.findOne({ _id: id });
     return lesson_schedules;
+  }
+
+  async getPaginatedPosts(size: number, page: number) {
+    const total_count = await LessonScheduleModel.countDocuments();
+    const { nextPage, total_pages, skip_size } = getPaginationInfo(size, page, total_count);
+    const lessons = await LessonScheduleModel.find({}, null, { sort: { date_start_event: 1 } })
+      .skip(skip_size)
+      .limit(size)
+      .exec();
+
+    return {
+      total_count,
+      current_page: page,
+      next_page: nextPage,
+      total_pages: total_pages,
+      posts: lessons,
+    };
   }
 }
 

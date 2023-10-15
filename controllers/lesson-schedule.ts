@@ -24,7 +24,7 @@ class LessonScheduleController {
 
   async update(req: Request, res: Response) {
     try {
-      const response = await this.lessonScheduleService.update({ ...req.body, _id: req.params.id });
+      const response = await this.lessonScheduleService.update(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -51,7 +51,6 @@ class LessonScheduleController {
   async getLessonSchedule(req: Request, res: Response) {
     try {
       const { id } = req.params;
-
       const response = await this.lessonScheduleService.getLessonSchedule(id);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
@@ -62,9 +61,10 @@ class LessonScheduleController {
     }
   }
 
-  async getLessonSchedules(req: Request, res: Response) {
+  async getPaginatedPosts(req: Request, res: Response) {
     try {
-      const response = await this.lessonScheduleService.getLessonSchedules();
+      const { size, page } = req.query as unknown as { size: string; page: string };
+      const response = await this.lessonScheduleService.getPaginatedPosts(parseInt(size), parseInt(page));
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;

@@ -6,19 +6,20 @@ export interface IPost {
   slug: string;
   short_description: string;
   rich_text: string;
-  date: Date;
+  createdAt: Date;
 }
 
-export const PostSchema = new Schema<IPost>({
-  heading: { type: String, required: true, unique: true },
-  slug: { type: String, required: true, unique: true },
-  short_description: { type: String, default: null },
-  rich_text: { type: String, default: null },
-  date: {
-    type: Date,
-    default: Date.now,
+export const PostSchema = new Schema<IPost>(
+  {
+    heading: { type: String, required: true, unique: true },
+    slug: { type: String, required: true, unique: true },
+    short_description: { type: String, default: null },
+    rich_text: { type: String, default: null },
   },
-});
+  {
+    timestamps: true,
+  },
+);
 
 export const Post = model("Post", PostSchema);
 
