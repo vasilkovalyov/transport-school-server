@@ -1,5 +1,5 @@
-import { BlockHeroModel, BlockFormatLessonsModel, BlockTeamEducationModel, BlockRequirementModel } from "../../models";
-import { getBlockContactsPublicData } from "../public/reuse-blocks";
+import { BlockHeroModel, BlockTeamEducationModel, BlockRequirementModel } from "../../models";
+import { getBlockContactsPublicData, getBlockServicesPublicData } from "../public/reuse-blocks";
 
 import { IPage } from "./type";
 
@@ -9,10 +9,10 @@ class PagePriceService {
     const params = { block_page: page, publish: true };
 
     const blockHero = await BlockHeroModel.findOne(params);
-    const blockFormatLessons = await BlockFormatLessonsModel.findOne(params);
     const blockTeamEducation = await BlockTeamEducationModel.findOne(params);
     const blockRequirement = await BlockRequirementModel.findOne(params);
 
+    const blockFormatLessons = await getBlockServicesPublicData(page);
     const blockContactsData = await getBlockContactsPublicData(page);
 
     return {

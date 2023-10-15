@@ -1,6 +1,6 @@
 import { IService, ServiceModel } from "../models";
 
-class Service {
+class ServiceServices {
   async create(data: IService) {
     const service = await new ServiceModel(data);
     await service.save();
@@ -43,4 +43,4 @@ class Service {
   }
 }
 
-export default Service;
+export default ServiceServices;

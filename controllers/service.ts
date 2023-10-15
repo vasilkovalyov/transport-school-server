@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import status from "../utils/status";
-import { Service } from "../services";
+import { ServiceServices } from "../services";
 
 class ServiceController {
-  Service: Service;
+  Service: ServiceServices;
 
   constructor() {
-    this.Service = new Service();
+    this.Service = new ServiceServices();
   }
 
   async create(req: Request, res: Response) {
