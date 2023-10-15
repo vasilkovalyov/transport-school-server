@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 export interface IService {
   _id: string;
@@ -8,11 +8,18 @@ export interface IService {
   bottom_list_info: string[];
 }
 
+const listSchema = new mongoose.Schema({
+  text: {
+    type: String,
+    default: null,
+  },
+});
+
 export const ServiceSchema = new Schema<IService>({
   heading: { type: String, required: true, unique: true },
   price: { type: Number },
-  top_list_info: [{ type: String, default: [] }],
-  bottom_list_info: [{ type: String, default: [] }],
+  top_list_info: [listSchema],
+  bottom_list_info: [listSchema],
 });
 
 export const Service = model("Service", ServiceSchema);

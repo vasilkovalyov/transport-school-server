@@ -34,9 +34,7 @@ class Service {
   async getServices() {
     const services = await ServiceModel.find();
 
-    return {
-      services: services,
-    };
+    return services;
   }
 
   async getService(id: string) {
