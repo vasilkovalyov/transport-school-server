@@ -5,8 +5,9 @@ export interface IReuseBlockFaq {
   _id: string;
   heading: string;
   list_faq: {
+    _id: string;
     heading: string;
-    text: string;
+    rich_text: string;
   }[];
   block_name: ReuseBlocsEnum;
 }
@@ -16,7 +17,7 @@ const listFaqSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  text: {
+  rich_text: {
     type: String,
     default: null,
   },
