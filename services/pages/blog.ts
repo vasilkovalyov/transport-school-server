@@ -12,8 +12,10 @@ class PageBlogService {
     const blockBlogData = await getBlockBlogPublicData(page);
     const blockCtaData = await getBlockCtaPublicData(page);
 
+    const blocks = [blockHero, blockBlogData, blockCtaData].filter((item) => item);
+
     return {
-      body: [blockHero, blockBlogData, blockCtaData],
+      body: blocks,
     };
   }
 }

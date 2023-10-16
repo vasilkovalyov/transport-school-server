@@ -21,8 +21,17 @@ class PageAboutCourseService {
 
     const blockCtaData = await getBlockCtaPublicData(page);
 
+    const blocks = [
+      blockHero,
+      blockCourseForPeople,
+      blockStructEducation,
+      blockBenefits,
+      blockWhoTeach,
+      blockCtaData,
+    ].filter((item) => item);
+
     return {
-      body: [blockHero, blockCourseForPeople, blockStructEducation, blockBenefits, blockWhoTeach, blockCtaData],
+      body: blocks,
     };
   }
 }

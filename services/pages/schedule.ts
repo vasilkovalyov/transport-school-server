@@ -12,8 +12,10 @@ class PageScheduleService {
     const blockScheduleData = await getBlockLessonSchedulesPublicData(page);
     const blockContactsData = await getBlockContactsPublicData(page);
 
+    const blocks = [blockHero, blockScheduleData, blockContactsData].filter((item) => item);
+
     return {
-      body: [blockHero, blockScheduleData, blockContactsData],
+      body: blocks,
     };
   }
 }

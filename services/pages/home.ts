@@ -18,8 +18,17 @@ class PageHomeService {
     const blockFaqData = await getBlockFaqPublicData(page);
     const blockAchivmentsData = await getBlockAchivmentsPublicData(page);
 
+    const blocks = [
+      blockHero,
+      blockAboutUs,
+      blockAbouCourse,
+      blockFormatLessons,
+      blockFaqData,
+      blockAchivmentsData,
+    ].filter((item) => item);
+
     return {
-      body: [blockHero, blockAboutUs, blockAbouCourse, blockFormatLessons, blockFaqData, blockAchivmentsData],
+      body: blocks,
     };
   }
 }

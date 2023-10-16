@@ -12,8 +12,10 @@ class PageContactService {
     const blockContactsData = await getBlockContactsPublicData(page);
     const blockCtaData = await getBlockCtaPublicData(page);
 
+    const blocks = [blockContactForm, blockContactsData, blockCtaData].filter((item) => item);
+
     return {
-      body: [blockContactForm, blockContactsData, blockCtaData],
+      body: blocks,
     };
   }
 }

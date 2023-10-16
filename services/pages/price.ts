@@ -15,8 +15,12 @@ class PagePriceService {
     const blockFormatLessons = await getBlockServicesPublicData(page);
     const blockContactsData = await getBlockContactsPublicData(page);
 
+    const blocks = [blockHero, blockFormatLessons, blockTeamEducation, blockRequirement, blockContactsData].filter(
+      (item) => item,
+    );
+
     return {
-      body: [blockHero, blockFormatLessons, blockTeamEducation, blockRequirement, blockContactsData],
+      body: blocks,
     };
   }
 }

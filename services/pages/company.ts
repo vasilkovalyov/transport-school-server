@@ -24,16 +24,18 @@ class PageCompanyService {
     const blockFaqData = await getBlockFaqPublicData(page);
     const blockBlogData = await getBlockBlogPublicData(page);
 
+    const blocks = [
+      blockHero,
+      blockAbout,
+      blockReviewData,
+      blockAchivmentsData,
+      blockContactsData,
+      blockFaqData,
+      blockBlogData,
+    ].filter((item) => item);
+
     return {
-      body: [
-        blockHero,
-        blockAbout,
-        blockReviewData,
-        blockAchivmentsData,
-        blockContactsData,
-        blockFaqData,
-        blockBlogData,
-      ],
+      body: blocks,
     };
   }
 }
