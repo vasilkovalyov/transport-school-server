@@ -6,6 +6,7 @@ export type ServiceType = {
   price: number;
   top_list_info: string[];
   bottom_list_info: string[];
+  image?: string;
 };
 
 const listSchema = new mongoose.Schema({
@@ -20,6 +21,7 @@ export const ServiceSchema = new Schema<ServiceType>({
   price: { type: Number },
   top_list_info: [listSchema],
   bottom_list_info: [listSchema],
+  image: { type: String, default: null },
 });
 
 export const Service = model("Service", ServiceSchema);

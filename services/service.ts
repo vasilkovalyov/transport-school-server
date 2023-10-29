@@ -1,8 +1,19 @@
 import { ServiceType, ServiceModel } from "../models";
+import { uploadImage } from "./file-uploader";
 
 class ServiceServices {
   async create(data: ServiceType) {
-    const service = await new ServiceModel(data);
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const service = await new ServiceModel({
+      ...data,
+      image,
+    });
     await service.save();
 
     return {
@@ -12,7 +23,21 @@ class ServiceServices {
   }
 
   async update(data: ServiceType) {
-    await ServiceModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await ServiceModel.findOneAndUpdate(
+      { _id: data._id },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Service has updated",
     };

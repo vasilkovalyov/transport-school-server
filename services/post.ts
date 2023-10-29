@@ -1,9 +1,20 @@
 import { PostType, PostModel } from "../models";
 import { getPaginationInfo } from "../utils/pagination";
+import { uploadImage } from "./file-uploader";
 
 class PostService {
   async create(data: PostType) {
-    const post = await new PostModel(data);
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const post = await new PostModel({
+      ...data,
+      image,
+    });
     await post.save();
 
     return {
@@ -13,7 +24,21 @@ class PostService {
   }
 
   async update(data: PostType) {
-    await PostModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await PostModel.findOneAndUpdate(
+      { _id: data._id },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Post has updated",
     };

@@ -7,6 +7,7 @@ export type PostType = {
   short_description: string;
   rich_text: string;
   createdAt: Date;
+  image?: string;
 };
 
 export const PostSchema = new Schema<PostType>(
@@ -15,6 +16,7 @@ export const PostSchema = new Schema<PostType>(
     slug: { type: String, required: true, unique: true },
     short_description: { type: String, default: null },
     rich_text: { type: String, default: null },
+    image: { type: String, default: null },
   },
   {
     timestamps: true,
