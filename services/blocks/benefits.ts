@@ -1,9 +1,20 @@
 import { IBlockService } from "./block";
 import { BlockBenefitsModel, BlockBenefitsType } from "../../models";
+import { uploadImage } from "../file-uploader";
 
 class BlockBenefits implements IBlockService<BlockBenefitsType> {
   async create(data: BlockBenefitsType) {
-    const post = await new BlockBenefitsModel(data);
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const post = await new BlockBenefitsModel({
+      ...data,
+      image,
+    });
     await post.save();
 
     return {
@@ -13,7 +24,21 @@ class BlockBenefits implements IBlockService<BlockBenefitsType> {
   }
 
   async update(data: BlockBenefitsType) {
-    await BlockBenefitsModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await BlockBenefitsModel.findOneAndUpdate(
+      { block_page: data.block_page },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Block benefits course has updated",
     };

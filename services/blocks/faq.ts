@@ -1,10 +1,21 @@
 import { IBlockService } from "./block";
 import { BlockFaqModel, BlockFaqType } from "../../models";
 import { ReuseBlockFaqModel } from "../../models/reuse-blocks";
+import { uploadImage } from "../file-uploader";
 
 class BlockFaq implements IBlockService<BlockFaqType> {
   async create(data: BlockFaqType) {
-    const post = await new BlockFaqModel(data);
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const post = await new BlockFaqModel({
+      ...data,
+      image,
+    });
     await post.save();
 
     return {
@@ -14,7 +25,21 @@ class BlockFaq implements IBlockService<BlockFaqType> {
   }
 
   async update(data: BlockFaqType) {
-    await BlockFaqModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await BlockFaqModel.findOneAndUpdate(
+      { _id: data._id },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Block faq course has updated",
     };

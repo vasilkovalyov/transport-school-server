@@ -1,9 +1,20 @@
 import { IBlockService } from "./block";
 import { BlockWhoTeachModel, BlockWhoTeachType } from "../../models";
+import { uploadImage } from "../file-uploader";
 
 class BlockWhoTeach implements IBlockService<BlockWhoTeachType> {
   async create(data: BlockWhoTeachType) {
-    const post = await new BlockWhoTeachModel(data);
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const post = await new BlockWhoTeachModel({
+      ...data,
+      image,
+    });
     await post.save();
 
     return {
@@ -13,7 +24,21 @@ class BlockWhoTeach implements IBlockService<BlockWhoTeachType> {
   }
 
   async update(data: BlockWhoTeachType) {
-    await BlockWhoTeachModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await BlockWhoTeachModel.findOneAndUpdate(
+      { block_page: data.block_page },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Block who teach course has updated",
     };

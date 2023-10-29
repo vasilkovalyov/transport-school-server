@@ -1,9 +1,20 @@
 import { IBlockService } from "./block";
 import { BlockAboutCourseModel, BlockAboutCourseType } from "../../models";
+import { uploadImage } from "../file-uploader";
 
 class BlockAboutCourse implements IBlockService<BlockAboutCourseType> {
   async create(data: BlockAboutCourseType) {
-    const post = await new BlockAboutCourseModel(data);
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const post = await new BlockAboutCourseModel({
+      ...data,
+      image,
+    });
     await post.save();
 
     return {
@@ -13,7 +24,21 @@ class BlockAboutCourse implements IBlockService<BlockAboutCourseType> {
   }
 
   async update(data: BlockAboutCourseType) {
-    await BlockAboutCourseModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await BlockAboutCourseModel.findOneAndUpdate(
+      { block_page: data.block_page },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Block about course has updated",
     };

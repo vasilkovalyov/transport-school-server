@@ -1,9 +1,20 @@
 import { IBlockService } from "./block";
 import { BlockContactFormModel, BlockContactFormType } from "../../models";
+import { uploadImage } from "../file-uploader";
 
 class BlockContactForm implements IBlockService<BlockContactFormType> {
   async create(data: BlockContactFormType) {
-    const post = await new BlockContactFormModel(data);
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const post = await new BlockContactFormModel({
+      ...data,
+      image,
+    });
     await post.save();
 
     return {
@@ -13,7 +24,21 @@ class BlockContactForm implements IBlockService<BlockContactFormType> {
   }
 
   async update(data: BlockContactFormType) {
-    await BlockContactFormModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await BlockContactFormModel.findOneAndUpdate(
+      { block_page: data.block_page },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Block contact form course has updated",
     };

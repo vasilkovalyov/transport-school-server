@@ -56,7 +56,6 @@ class BlockHero implements IBlockService<BlockHeroType> {
 
   async getBlock(page: string) {
     const post = await BlockHeroModel.findOne({ block_page: page });
-    console.log("post", post);
     return post;
   }
 }
