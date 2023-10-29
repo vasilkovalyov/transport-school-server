@@ -9,6 +9,7 @@ export type ReuseBlockContactsType = {
   email: string;
   map_url: string;
   block_name: ReuseBlocsEnum;
+  image?: string;
 };
 
 export const ReuseBlockContactsSchema = new Schema<ReuseBlockContactsType>({
@@ -18,6 +19,7 @@ export const ReuseBlockContactsSchema = new Schema<ReuseBlockContactsType>({
   email: { type: String, default: null },
   map_url: { type: String, default: null },
   block_name: { type: String, default: ReuseBlocsEnum.ReuseBlockContacts, immutable: true },
+  image: { type: String, default: null },
 });
 
 export const ReuseBlockContacts = model("ReuseBlockContacts", ReuseBlockContactsSchema);

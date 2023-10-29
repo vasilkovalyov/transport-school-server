@@ -10,6 +10,7 @@ export type ReuseBlockFaqType = {
     rich_text: string;
   }[];
   block_name: ReuseBlocsEnum;
+  image?: string;
 };
 
 const listFaqSchema = new mongoose.Schema({
@@ -27,6 +28,7 @@ export const BlockFaqSchema = new Schema<ReuseBlockFaqType>({
   heading: { type: String, required: true },
   list_faq: [listFaqSchema],
   block_name: { type: String, default: ReuseBlocsEnum.ReuseBlockFaq, immutable: true },
+  image: { type: String, default: null },
 });
 
 export const BlockFaq = model("ReuseBlockFaq", BlockFaqSchema);

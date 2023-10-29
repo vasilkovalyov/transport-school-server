@@ -1,11 +1,22 @@
 import { ReuseBlockContactsModel, ReuseBlockContactsType } from "../../models/reuse-blocks";
+import { uploadImage } from "../file-uploader";
 
 class ReuseBlockContacts {
   async update(data: ReuseBlockContactsType) {
     const post = await ReuseBlockContactsModel.findOne();
 
     if (!post) {
-      const contacts = await new ReuseBlockContactsModel(data);
+      let image = "";
+
+      if (data.image) {
+        const response = await uploadImage(data.image);
+        image = response.secure_url;
+      }
+
+      const contacts = await new ReuseBlockContactsModel({
+        ...data,
+        image,
+      });
       await contacts.save();
       return {
         message: "Contacts has saved",
@@ -17,6 +28,7 @@ class ReuseBlockContacts {
     post.phone = data.phone;
     post.email = data.email;
     post.map_url = data.map_url;
+    post.image = data.image;
 
     await post.save();
 

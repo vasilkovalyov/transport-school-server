@@ -1,11 +1,22 @@
 import { ReuseBlockFaqModel, ReuseBlockFaqType } from "../../models/reuse-blocks";
+import { uploadImage } from "../file-uploader";
 
 class ReuseBlockFaq {
   async update(data: ReuseBlockFaqType) {
     const post = await ReuseBlockFaqModel.findOne();
 
     if (!post) {
-      const contacts = await new ReuseBlockFaqModel(data);
+      let image = "";
+
+      if (data.image) {
+        const response = await uploadImage(data.image);
+        image = response.secure_url;
+      }
+
+      const contacts = await new ReuseBlockFaqModel({
+        ...data,
+        image,
+      });
       await contacts.save();
       return {
         message: "Faq has saved",
@@ -14,6 +25,8 @@ class ReuseBlockFaq {
 
     post.heading = data.heading;
     post.list_faq = data.list_faq;
+    post.image = data.image;
+
     await post.save();
 
     return {
