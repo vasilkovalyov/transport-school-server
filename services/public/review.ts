@@ -1,8 +1,19 @@
 import { ReviewType, ReviewModel } from "../../models/public";
+import { uploadImage } from "../file-uploader";
 
 class ReviewService {
-  async create(params: ReviewType) {
-    const review = await new ReviewModel(params);
+  async create(data: ReviewType) {
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const review = await new ReviewModel({
+      ...data,
+      image,
+    });
     await review.save();
     return {
       message: "Review has created",
@@ -10,7 +21,21 @@ class ReviewService {
   }
 
   async update(data: ReviewType) {
-    await ReviewModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await ReviewModel.findOneAndUpdate(
+      { _id: data._id },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Review has updated",
     };
