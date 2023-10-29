@@ -1,10 +1,10 @@
-export interface IUser {
+export type UserType = {
   _id: String;
   login: string;
   password: string;
-}
+};
 
-export interface IUserLogin {
+export type UserLoginType = {
   login: string;
   password: string;
-}
+};

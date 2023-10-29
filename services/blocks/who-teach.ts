@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockWhoTeachModel, IBlockWhoTeach } from "../../models";
+import { BlockWhoTeachModel, BlockWhoTeachType } from "../../models";
 
-class BlockWhoTeach implements IBlockService<IBlockWhoTeach> {
-  async create(data: IBlockWhoTeach) {
+class BlockWhoTeach implements IBlockService<BlockWhoTeachType> {
+  async create(data: BlockWhoTeachType) {
     const post = await new BlockWhoTeachModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockWhoTeach implements IBlockService<IBlockWhoTeach> {
     };
   }
 
-  async update(data: IBlockWhoTeach) {
+  async update(data: BlockWhoTeachType) {
     await BlockWhoTeachModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block who teach course has updated",

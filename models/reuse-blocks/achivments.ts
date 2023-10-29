@@ -1,7 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 import { ReuseBlocsEnum } from "./block-enum.type";
 
-export interface IReuseBlockAchivments {
+export type ReuseBlockAchivmentsType = {
   _id: string;
   heading: string;
   subheading: string;
@@ -10,7 +10,7 @@ export interface IReuseBlockAchivments {
     text: string;
   }[];
   block_name: ReuseBlocsEnum;
-}
+};
 
 const listAchivmentSchema = new mongoose.Schema({
   heading: {
@@ -23,7 +23,7 @@ const listAchivmentSchema = new mongoose.Schema({
   },
 });
 
-export const BlockAchivmentsSchema = new Schema<IReuseBlockAchivments>({
+export const BlockAchivmentsSchema = new Schema<ReuseBlockAchivmentsType>({
   heading: { type: String, required: true },
   subheading: { type: String, default: null },
   list_achivments: [listAchivmentSchema],

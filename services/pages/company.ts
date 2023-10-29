@@ -8,10 +8,10 @@ import {
   getBlockBlogPublicData,
 } from "../public/reuse-blocks";
 
-import { IPage } from "./type";
+import { PageType } from "./type";
 
 class PageCompanyService {
-  async getPage(): Promise<IPage> {
+  async getPage(): Promise<PageType> {
     const page = "company";
     const params = { block_page: page, publish: true };
 

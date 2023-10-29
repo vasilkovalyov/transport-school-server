@@ -1,7 +1,7 @@
-import { ISeo, SeoModel } from "../../models/public";
+import { SeoType, SeoModel } from "../../models/public";
 
 class SeoService {
-  async update(data: ISeo) {
+  async update(data: SeoType) {
     const post = await SeoModel.findOne({ page: data.page });
 
     if (!post) {

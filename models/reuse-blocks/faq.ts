@@ -1,7 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 import { ReuseBlocsEnum } from "./block-enum.type";
 
-export interface IReuseBlockFaq {
+export type ReuseBlockFaqType = {
   _id: string;
   heading: string;
   list_faq: {
@@ -10,7 +10,7 @@ export interface IReuseBlockFaq {
     rich_text: string;
   }[];
   block_name: ReuseBlocsEnum;
-}
+};
 
 const listFaqSchema = new mongoose.Schema({
   heading: {
@@ -23,7 +23,7 @@ const listFaqSchema = new mongoose.Schema({
   },
 });
 
-export const BlockFaqSchema = new Schema<IReuseBlockFaq>({
+export const BlockFaqSchema = new Schema<ReuseBlockFaqType>({
   heading: { type: String, required: true },
   list_faq: [listFaqSchema],
   block_name: { type: String, default: ReuseBlocsEnum.ReuseBlockFaq, immutable: true },

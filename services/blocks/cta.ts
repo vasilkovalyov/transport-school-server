@@ -1,9 +1,9 @@
 import { IBlockService } from "./block";
-import { BlockCtaModel, IBlockCta } from "../../models";
+import { BlockCtaModel, BlockCtaType } from "../../models";
 import { ReuseBlockCtaModel } from "../../models/reuse-blocks";
 
-class BlockCta implements IBlockService<IBlockCta> {
-  async create(data: IBlockCta) {
+class BlockCta implements IBlockService<BlockCtaType> {
+  async create(data: BlockCtaType) {
     const post = await new BlockCtaModel(data);
     await post.save();
 
@@ -13,7 +13,7 @@ class BlockCta implements IBlockService<IBlockCta> {
     };
   }
 
-  async update(data: IBlockCta) {
+  async update(data: BlockCtaType) {
     await BlockCtaModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Block cta course has updated",

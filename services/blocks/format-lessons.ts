@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockFormatLessonsModel, IBlockFormatLessons } from "../../models";
+import { BlockFormatLessonsModel, BlockFormatLessonsType } from "../../models";
 
-class BlockFormatLessons implements IBlockService<IBlockFormatLessons> {
-  async create(data: IBlockFormatLessons) {
+class BlockFormatLessons implements IBlockService<BlockFormatLessonsType> {
+  async create(data: BlockFormatLessonsType) {
     const post = await new BlockFormatLessonsModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockFormatLessons implements IBlockService<IBlockFormatLessons> {
     };
   }
 
-  async update(data: IBlockFormatLessons) {
+  async update(data: BlockFormatLessonsType) {
     await BlockFormatLessonsModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block format lessons course has updated",

@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlock {
+export type BlockType = {
   _id: string;
   block_order: number;
   block_page: string;
   block_name: BlocsEnum;
   heading: string;
   publish: boolean;
-}
+};
 
-export type IBlockСutDown = Omit<IBlock, "heading">;
+export type BlockShortType = Omit<BlockType, "heading">;
 
 export const baseSchema = new mongoose.Schema({
   block_order: { type: Number, default: null },

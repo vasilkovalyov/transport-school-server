@@ -4,10 +4,10 @@ import { UserModel } from "../models";
 import bcrypt from "bcrypt";
 import TokenService from "./token";
 import { AuthMessages } from "../constants/response-messages";
-import { IUserLogin } from "../types/admin";
+import { UserLoginType } from "../types/admin";
 
 class AuthService {
-  async login({ login, password }: IUserLogin) {
+  async login({ login, password }: UserLoginType) {
     const userModel = await UserModel.findOne({
       login: login,
     });
@@ -29,7 +29,7 @@ class AuthService {
     };
   }
 
-  async registration({ login, password }: IUserLogin) {
+  async registration({ login, password }: UserLoginType) {
     const userExist = await UserModel.findOne({ login: login });
     if (userExist) throw ApiError.BadRequestError(AuthMessages.userExist);
 

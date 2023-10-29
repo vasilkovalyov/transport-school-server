@@ -1,10 +1,10 @@
 import { Response, NextFunction } from "express";
 import { TokenService } from "../services";
-import { ITokenData, RequestWithAuthUser } from "../types/token";
+import { TokenDataType, RequestWithAuthUserType } from "../types/token";
 import status from "../utils/status";
 import { AuthMessages } from "../constants/response-messages";
 
-export default async function (req: RequestWithAuthUser, res: Response, next: NextFunction) {
+export default async function (req: RequestWithAuthUserType, res: Response, next: NextFunction) {
   try {
     const token = req.headers.authorization;
     if (!token) {
@@ -16,7 +16,7 @@ export default async function (req: RequestWithAuthUser, res: Response, next: Ne
     if (!userData) {
       return res.status(status.BAD_REQUEST).json({ message: AuthMessages.destroyedToken });
     }
-    req.user = userData as ITokenData;
+    req.user = userData as TokenDataType;
 
     return next();
   } catch (err) {

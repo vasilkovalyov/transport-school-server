@@ -4,10 +4,10 @@ import {
   getBlockAchivmentsPublicData,
   getBlockServicesPublicData,
 } from "../public/reuse-blocks";
-import { IPage } from "./type";
+import { PageType } from "./type";
 
 class PageHomeService {
-  async getPage(): Promise<IPage> {
+  async getPage(): Promise<PageType> {
     const page = "home";
     const params = { block_page: page, publish: true };
     const blockHero = await BlockHeroModel.findOne(params);

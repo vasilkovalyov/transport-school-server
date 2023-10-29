@@ -1,7 +1,7 @@
-import { ReuseBlockReviewModel, IReuseBlockReview } from "../../models/reuse-blocks";
+import { ReuseBlockReviewModel, ReuseBlockReviewType } from "../../models/reuse-blocks";
 
 class ReuseBlockReview {
-  async update(data: IReuseBlockReview) {
+  async update(data: ReuseBlockReviewType) {
     const post = await ReuseBlockReviewModel.findOne();
 
     if (!post) {

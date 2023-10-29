@@ -1,8 +1,8 @@
 import { CommonContactsModel } from "../models";
-import { IContacts, ISocialNetworks } from "../models/common-contacts";
+import { ContactsType, SocialNetworksType } from "../models/common-contacts";
 
 class CommonContactsService {
-  async updateContacts(data: IContacts) {
+  async updateContacts(data: ContactsType) {
     const post = await CommonContactsModel.findOne();
 
     if (!post) {
@@ -23,7 +23,7 @@ class CommonContactsService {
     };
   }
 
-  async updateSocial(data: ISocialNetworks) {
+  async updateSocial(data: SocialNetworksType) {
     const post = await CommonContactsModel.findOne();
 
     if (!post) {

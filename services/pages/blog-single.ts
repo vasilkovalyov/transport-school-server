@@ -1,10 +1,10 @@
-import { IBlockCta, IPost, PostModel, CommonContactsModel } from "../../models";
+import { BlockCtaType, PostType, PostModel, CommonContactsModel } from "../../models";
 import { ReuseBlockCtaModel } from "../../models/reuse-blocks";
 
-import { ISingleBlog } from "./type";
+import { SingleBlogType } from "./type";
 
 class PageBlogSingleService {
-  async getPage(slug: string): Promise<ISingleBlog> {
+  async getPage(slug: string): Promise<SingleBlogType> {
     const post = await PostModel.findOne({ slug: slug });
     const ctaReuseBlock = await ReuseBlockCtaModel.findOne();
     const contactsData = await CommonContactsModel.findOne();
@@ -24,11 +24,11 @@ class PageBlogSingleService {
     }
 
     return {
-      post: post as unknown as IPost,
+      post: post as unknown as PostType,
       blockRelatedPosts: {
         posts: posts,
       },
-      blockCta: blockCtaData as IBlockCta,
+      blockCta: blockCtaData as BlockCtaType,
     };
   }
 }

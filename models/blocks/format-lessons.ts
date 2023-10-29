@@ -1,13 +1,13 @@
 import { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { baseSchema, BlockType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockFormatLessons extends IBlock {
+export type BlockFormatLessonsType = BlockType & {
   rich_text: string;
   use_dark_theme: boolean;
-}
+};
 
-export const BlockFormatLessonsSchema = new Schema<IBlockFormatLessons>({
+export const BlockFormatLessonsSchema = new Schema<BlockFormatLessonsType>({
   rich_text: { type: String, default: null },
   use_dark_theme: { type: Boolean, default: null },
   block_name: { type: String, default: BlocsEnum.BlockFormatLessons, immutable: true },

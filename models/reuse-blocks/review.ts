@@ -1,13 +1,13 @@
 import { Schema, model } from "mongoose";
 import { ReuseBlocsEnum } from "./block-enum.type";
 
-export interface IReuseBlockReview {
+export type ReuseBlockReviewType = {
   _id: string;
   heading: string;
   block_name: ReuseBlocsEnum;
-}
+};
 
-export const BlockReviewSchema = new Schema<IReuseBlockReview>({
+export const BlockReviewSchema = new Schema<ReuseBlockReviewType>({
   heading: {
     type: String,
   },

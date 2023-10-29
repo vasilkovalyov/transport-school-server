@@ -1,15 +1,15 @@
 import { Schema, model } from "mongoose";
 
-export interface IPost {
+export type PostType = {
   _id: string;
   heading: string;
   slug: string;
   short_description: string;
   rich_text: string;
   createdAt: Date;
-}
+};
 
-export const PostSchema = new Schema<IPost>(
+export const PostSchema = new Schema<PostType>(
   {
     heading: { type: String, required: true, unique: true },
     slug: { type: String, required: true, unique: true },

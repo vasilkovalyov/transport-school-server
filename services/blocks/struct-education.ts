@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockStructEducationModel, IBlockStructEducation } from "../../models";
+import { BlockStructEducationModel, BlockStructEducationType } from "../../models";
 
-class BlockStructEducation implements IBlockService<IBlockStructEducation> {
-  async create(data: IBlockStructEducation) {
+class BlockStructEducation implements IBlockService<BlockStructEducationType> {
+  async create(data: BlockStructEducationType) {
     const post = await new BlockStructEducationModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockStructEducation implements IBlockService<IBlockStructEducation> {
     };
   }
 
-  async update(data: IBlockStructEducation) {
+  async update(data: BlockStructEducationType) {
     await BlockStructEducationModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block struct education course has updated",

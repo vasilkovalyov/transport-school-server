@@ -1,10 +1,10 @@
 import { Request } from "express";
 
-export interface ITokenData {
+export type TokenDataType = {
   _id: string;
   exp: number;
-}
+};
 
-export interface RequestWithAuthUser extends Request {
-  user?: ITokenData | null;
-}
+export type RequestWithAuthUserType = Request & {
+  user?: TokenDataType | null;
+};

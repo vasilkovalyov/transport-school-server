@@ -1,13 +1,13 @@
 import { Schema, model } from "mongoose";
 
-export interface IReview {
+export type ReviewType = {
   _id: string;
   name: string;
   text: string;
   rating: number;
-}
+};
 
-export const ReviewSchema = new Schema<IReview>({
+export const ReviewSchema = new Schema<ReviewType>({
   name: { type: String },
   text: { type: String },
   rating: { type: Number },

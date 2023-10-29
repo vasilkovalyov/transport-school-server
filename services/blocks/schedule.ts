@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockScheduleModel, IBlockSchedule } from "../../models";
+import { BlockScheduleModel, BlockScheduleType } from "../../models";
 
-class BlockSchedule implements IBlockService<IBlockSchedule> {
-  async create(data: IBlockSchedule) {
+class BlockSchedule implements IBlockService<BlockScheduleType> {
+  async create(data: BlockScheduleType) {
     const post = await new BlockScheduleModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockSchedule implements IBlockService<IBlockSchedule> {
     };
   }
 
-  async update(data: IBlockSchedule) {
+  async update(data: BlockScheduleType) {
     await BlockScheduleModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block schedule course has updated",

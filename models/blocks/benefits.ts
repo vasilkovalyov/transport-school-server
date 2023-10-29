@@ -1,12 +1,12 @@
 import { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { baseSchema, BlockType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockBenefits extends IBlock {
+export type BlockBenefitsType = BlockType & {
   rich_text: string;
-}
+};
 
-export const BlockBenefitsSchema = new Schema<IBlockBenefits>({
+export const BlockBenefitsSchema = new Schema<BlockBenefitsType>({
   rich_text: { type: String, default: null },
   block_name: { type: String, default: BlocsEnum.BlockBenefits, immutable: true },
 });

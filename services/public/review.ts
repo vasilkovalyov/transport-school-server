@@ -1,7 +1,7 @@
-import { IReview, ReviewModel } from "../../models/public";
+import { ReviewType, ReviewModel } from "../../models/public";
 
 class ReviewService {
-  async create(params: IReview) {
+  async create(params: ReviewType) {
     const review = await new ReviewModel(params);
     await review.save();
     return {
@@ -9,7 +9,7 @@ class ReviewService {
     };
   }
 
-  async update(data: IReview) {
+  async update(data: ReviewType) {
     await ReviewModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Review has updated",

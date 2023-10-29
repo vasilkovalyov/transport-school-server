@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockAboutUsModel, IBlockAboutUs } from "../../models";
+import { BlockAboutUsModel, BlockAboutUsType } from "../../models";
 
-class BlockAboutUs implements IBlockService<IBlockAboutUs> {
-  async create(data: IBlockAboutUs) {
+class BlockAboutUs implements IBlockService<BlockAboutUsType> {
+  async create(data: BlockAboutUsType) {
     const post = await new BlockAboutUsModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockAboutUs implements IBlockService<IBlockAboutUs> {
     };
   }
 
-  async update(data: IBlockAboutUs) {
+  async update(data: BlockAboutUsType) {
     await BlockAboutUsModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block about us course has updated",

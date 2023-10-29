@@ -1,7 +1,7 @@
-import { ReuseBlockContactsModel, IReuseBlockContacts } from "../../models/reuse-blocks";
+import { ReuseBlockContactsModel, ReuseBlockContactsType } from "../../models/reuse-blocks";
 
 class ReuseBlockContacts {
-  async update(data: IReuseBlockContacts) {
+  async update(data: ReuseBlockContactsType) {
     const post = await ReuseBlockContactsModel.findOne();
 
     if (!post) {

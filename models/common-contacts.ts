@@ -1,23 +1,24 @@
 import mongoose, { Schema, model } from "mongoose";
 
-export interface ICommonContacts extends IContacts, ISocialNetworks {
-  _id: string;
-}
+export type CommonContactsType = ContactsType &
+  SocialNetworksType & {
+    _id: string;
+  };
 
-export interface IContacts {
+export type ContactsType = {
   email: string;
   address: string;
   phone: string;
-}
+};
 
-export interface ISocialNetworks {
-  social_list: ISocialItem[];
-}
+export type SocialNetworksType = {
+  social_list: SocialItemType[];
+};
 
-export interface ISocialItem {
+export type SocialItemType = {
   social_icon: string;
   social_url: string;
-}
+};
 
 const socialListSchema = new mongoose.Schema({
   social_icon: {
@@ -30,7 +31,7 @@ const socialListSchema = new mongoose.Schema({
   },
 });
 
-export const CommonContactsSchema = new Schema<ICommonContacts>({
+export const CommonContactsSchema = new Schema<CommonContactsType>({
   email: { type: String, default: null },
   address: { type: String, default: null },
   phone: { type: String, default: null },

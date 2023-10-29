@@ -1,8 +1,8 @@
-import { ILessonSchedule, LessonScheduleModel } from "../models";
+import { LessonScheduleType, LessonScheduleModel } from "../models";
 import { getPaginationInfo } from "../utils/pagination";
 
 class LessonScheduleService {
-  async create(data: ILessonSchedule) {
+  async create(data: LessonScheduleType) {
     const lesson_schedule = await new LessonScheduleModel(data);
     await lesson_schedule.save();
 
@@ -12,7 +12,7 @@ class LessonScheduleService {
     };
   }
 
-  async update(data: ILessonSchedule) {
+  async update(data: LessonScheduleType) {
     await LessonScheduleModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Lesson schedule has updated",

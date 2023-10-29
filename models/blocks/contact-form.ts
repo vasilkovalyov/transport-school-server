@@ -1,14 +1,14 @@
 import { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { baseSchema, BlockType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockContactForm extends IBlock {
+export type BlockContactFormType = BlockType & {
   rich_text: string;
   form_heading: string;
   require_message: string;
-}
+};
 
-export const BlockContactFormSchema = new Schema<IBlockContactForm>({
+export const BlockContactFormSchema = new Schema<BlockContactFormType>({
   rich_text: { type: String, default: null },
   form_heading: { type: String, default: null },
   require_message: { type: String, default: null },

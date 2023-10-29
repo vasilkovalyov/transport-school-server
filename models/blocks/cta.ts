@@ -1,10 +1,10 @@
 import { Schema, model } from "mongoose";
-import { shortSchema, IBlockСutDown } from "./base-model";
+import { shortSchema, BlockShortType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockCta extends IBlockСutDown {}
+export type BlockCtaType = BlockShortType;
 
-export const BlockCtaSchema = new Schema<IBlockCta>({
+export const BlockCtaSchema = new Schema<BlockCtaType>({
   block_name: { type: String, default: BlocsEnum.BlockCta, immutable: true },
 });
 

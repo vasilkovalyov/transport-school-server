@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 export type LessonType = "offline" | "online";
 
-export interface ILessonSchedule {
+export type LessonScheduleType = {
   _id: string;
   heading: string;
   type_group: string;
@@ -12,9 +12,9 @@ export interface ILessonSchedule {
   time_start: string;
   time_end: string;
   date_start_event: string;
-}
+};
 
-export const LessonScheduleSchema = new Schema<ILessonSchedule>(
+export const LessonScheduleSchema = new Schema<LessonScheduleType>(
   {
     heading: { type: String, required: true, unique: true },
     type_group: { type: String, default: null },

@@ -1,12 +1,12 @@
 import mongoose, { Schema, model } from "mongoose";
 
-export interface IService {
+export type ServiceType = {
   _id: string;
   heading: string;
   price: number;
   top_list_info: string[];
   bottom_list_info: string[];
-}
+};
 
 const listSchema = new mongoose.Schema({
   text: {
@@ -15,7 +15,7 @@ const listSchema = new mongoose.Schema({
   },
 });
 
-export const ServiceSchema = new Schema<IService>({
+export const ServiceSchema = new Schema<ServiceType>({
   heading: { type: String, required: true, unique: true },
   price: { type: Number },
   top_list_info: [listSchema],

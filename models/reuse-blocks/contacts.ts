@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import { ReuseBlocsEnum } from "./block-enum.type";
 
-export interface IReuseBlockContacts {
+export type ReuseBlockContactsType = {
   _id: string;
   heading: string;
   address: string;
@@ -9,9 +9,9 @@ export interface IReuseBlockContacts {
   email: string;
   map_url: string;
   block_name: ReuseBlocsEnum;
-}
+};
 
-export const ReuseBlockContactsSchema = new Schema<IReuseBlockContacts>({
+export const ReuseBlockContactsSchema = new Schema<ReuseBlockContactsType>({
   heading: { type: String, required: true },
   address: { type: String, default: null },
   phone: { type: String, default: null },

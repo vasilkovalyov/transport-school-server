@@ -1,7 +1,7 @@
-import { ReuseBlockAchivmentModel, IReuseBlockAchivments } from "../../models/reuse-blocks";
+import { ReuseBlockAchivmentModel, ReuseBlockAchivmentsType } from "../../models/reuse-blocks";
 
 class ReuseBlockAchivments {
-  async update(data: IReuseBlockAchivments) {
+  async update(data: ReuseBlockAchivmentsType) {
     const post = await ReuseBlockAchivmentModel.findOne();
 
     if (!post) {

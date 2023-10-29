@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockRequirementModel, IBlockRequirement } from "../../models";
+import { BlockRequirementModel, BlockRequirementType } from "../../models";
 
-class BlockRequirement implements IBlockService<IBlockRequirement> {
-  async create(data: IBlockRequirement) {
+class BlockRequirement implements IBlockService<BlockRequirementType> {
+  async create(data: BlockRequirementType) {
     const post = await new BlockRequirementModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockRequirement implements IBlockService<IBlockRequirement> {
     };
   }
 
-  async update(data: IBlockRequirement) {
+  async update(data: BlockRequirementType) {
     await BlockRequirementModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block requirement course has updated",

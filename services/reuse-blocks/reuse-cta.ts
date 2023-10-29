@@ -1,7 +1,7 @@
-import { ReuseBlockCtaModel, IReuseBlockCta } from "../../models/reuse-blocks";
+import { ReuseBlockCtaModel, ReuseBlockCtaType } from "../../models/reuse-blocks";
 
 class ReuseBlockCta {
-  async update(data: IReuseBlockCta) {
+  async update(data: ReuseBlockCtaType) {
     const post = await ReuseBlockCtaModel.findOne();
 
     if (!post) {

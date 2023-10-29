@@ -1,10 +1,10 @@
 import { Schema, model } from "mongoose";
-import { shortSchema, IBlockСutDown } from "./base-model";
+import { shortSchema, BlockShortType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockAchivments extends IBlockСutDown {}
+export type BlockAchivmentsType = BlockShortType;
 
-export const BlockAchivmentsSchema = new Schema<IBlockAchivments>({
+export const BlockAchivmentsSchema = new Schema<BlockAchivmentsType>({
   block_name: { type: String, default: BlocsEnum.BlockAchivments, immutable: true },
 });
 

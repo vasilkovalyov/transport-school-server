@@ -7,10 +7,10 @@ import {
 } from "../../models";
 import { getBlockCtaPublicData } from "../public/reuse-blocks";
 
-import { IPage } from "./type";
+import { PageType } from "./type";
 
 class PageAboutCourseService {
-  async getPage(): Promise<IPage> {
+  async getPage(): Promise<PageType> {
     const page = "about-course";
     const params = { block_page: page, publish: true };
     const blockHero = await BlockHeroModel.findOne(params);

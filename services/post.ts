@@ -1,8 +1,8 @@
-import { IPost, PostModel } from "../models";
+import { PostType, PostModel } from "../models";
 import { getPaginationInfo } from "../utils/pagination";
 
 class PostService {
-  async create(data: IPost) {
+  async create(data: PostType) {
     const post = await new PostModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class PostService {
     };
   }
 
-  async update(data: IPost) {
+  async update(data: PostType) {
     await PostModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Post has updated",

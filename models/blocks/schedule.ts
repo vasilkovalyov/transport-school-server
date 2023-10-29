@@ -1,13 +1,13 @@
 import { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { baseSchema, BlockType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockSchedule extends IBlock {
+export type BlockScheduleType = BlockType & {
   subheading: string;
   post_number: number;
-}
+};
 
-export const BlockScheduleSchema = new Schema<IBlockSchedule>({
+export const BlockScheduleSchema = new Schema<BlockScheduleType>({
   subheading: {
     type: String,
     default: null,

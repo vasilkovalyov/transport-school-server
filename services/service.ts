@@ -1,7 +1,7 @@
-import { IService, ServiceModel } from "../models";
+import { ServiceType, ServiceModel } from "../models";
 
 class ServiceServices {
-  async create(data: IService) {
+  async create(data: ServiceType) {
     const service = await new ServiceModel(data);
     await service.save();
 
@@ -11,7 +11,7 @@ class ServiceServices {
     };
   }
 
-  async update(data: IService) {
+  async update(data: ServiceType) {
     await ServiceModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Service has updated",

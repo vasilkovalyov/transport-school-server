@@ -1,63 +1,63 @@
 import {
-  IBlockAboutCourse,
-  IBlockAboutUs,
-  IBlockAbout,
-  IBlockAchivments,
-  IBlockBenefits,
-  IBlockBlog,
-  IBlockContactForm,
-  IBlockContacts,
-  IBlockCourseForPeople,
-  IBlockCta,
-  IBlockFormatLessons,
-  IBlockHero,
-  IBlockRequirement,
-  IBlockReviews,
-  IBlockSchedule,
-  IBlockStructEducation,
-  IBlockTeamEducation,
-  IBlockWhoTeach,
-  ICommonContacts,
-  IPost,
+  BlockAboutCourseType,
+  BlockAboutUsType,
+  BlockAboutType,
+  BlockAchivmentsType,
+  BlockBenefitsType,
+  BlockBlogType,
+  BlockContactFormType,
+  BlockContactsType,
+  BlockCourseForPeopleType,
+  BlockCtaType,
+  BlockFormatLessonsType,
+  BlockHeroType,
+  BlockRequirementType,
+  BlockReviewsType,
+  BlockScheduleType,
+  BlockStructEducationType,
+  BlockTeamEducationType,
+  BlockWhoTeachType,
+  CommonContactsType,
+  PostType,
 } from "../../models";
 
-export interface ISeo {
+export type SeoType = {
   title?: string;
   description?: string;
   keywords?: string;
-}
+};
 
-export interface IPage {
-  seo?: ISeo;
+export type PageType = {
+  seo?: SeoType;
   body?: PageBodyProps[];
-  contacts?: ICommonContacts;
-}
+  contacts?: CommonContactsType;
+};
 
-export interface ISingleBlog {
-  post: IPost;
+export type SingleBlogType = {
+  post: PostType;
   blockRelatedPosts?: {
-    posts: IPost[];
+    posts: PostType[];
   };
-  blockCta?: IBlockCta;
-}
+  blockCta?: BlockCtaType;
+};
 
 export type PageBodyProps =
-  | IBlockHero
-  | IBlockAboutUs
-  | IBlockAboutCourse
-  | IBlockAbout
-  | IBlockAchivments
-  | IBlockBenefits
-  | IBlockBlog
-  | IBlockContactForm
-  | IBlockContacts
-  | IBlockCourseForPeople
-  | IBlockCta
-  | IBlockFormatLessons
-  | IBlockRequirement
-  | IBlockReviews
-  | IBlockSchedule
-  | IBlockStructEducation
-  | IBlockTeamEducation
-  | IBlockWhoTeach
+  | BlockHeroType
+  | BlockAboutUsType
+  | BlockAboutCourseType
+  | BlockAboutType
+  | BlockAchivmentsType
+  | BlockBenefitsType
+  | BlockBlogType
+  | BlockContactFormType
+  | BlockContactsType
+  | BlockCourseForPeopleType
+  | BlockCtaType
+  | BlockFormatLessonsType
+  | BlockRequirementType
+  | BlockReviewsType
+  | BlockScheduleType
+  | BlockStructEducationType
+  | BlockTeamEducationType
+  | BlockWhoTeachType
   | unknown;

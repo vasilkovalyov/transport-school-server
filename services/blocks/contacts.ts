@@ -1,9 +1,9 @@
 import { IBlockService } from "./block";
-import { BlockContactsModel, IBlockContacts } from "../../models";
+import { BlockContactsModel, BlockContactsType } from "../../models";
 import { ReuseBlockContactsModel } from "../../models/reuse-blocks";
 
-class BlockContacts implements IBlockService<IBlockContacts> {
-  async create(data: IBlockContacts) {
+class BlockContacts implements IBlockService<BlockContactsType> {
+  async create(data: BlockContactsType) {
     const post = await new BlockContactsModel(data);
     await post.save();
 
@@ -13,7 +13,7 @@ class BlockContacts implements IBlockService<IBlockContacts> {
     };
   }
 
-  async update(data: IBlockContacts) {
+  async update(data: BlockContactsType) {
     await BlockContactsModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Block contacts course has updated",

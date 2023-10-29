@@ -1,14 +1,14 @@
 import mongoose, { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { baseSchema, BlockType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockStructEducation extends IBlock {
+export type BlockStructEducationType = BlockType & {
   struct_education_list: {
     _id: string;
     heading: string;
     rich_text: string;
   }[];
-}
+};
 
 const structEducationListSchema = new mongoose.Schema({
   heading: {
@@ -21,7 +21,7 @@ const structEducationListSchema = new mongoose.Schema({
   },
 });
 
-export const BlockStructEducationSchema = new Schema<IBlockStructEducation>({
+export const BlockStructEducationSchema = new Schema<BlockStructEducationType>({
   struct_education_list: [structEducationListSchema],
   block_name: { type: String, default: BlocsEnum.BlockStructEducation, immutable: true },
 });

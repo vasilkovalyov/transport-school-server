@@ -1,9 +1,9 @@
 import { IBlockService } from "./block";
-import { BlockFaqModel, IBlockFaq } from "../../models";
+import { BlockFaqModel, BlockFaqType } from "../../models";
 import { ReuseBlockFaqModel } from "../../models/reuse-blocks";
 
-class BlockFaq implements IBlockService<IBlockFaq> {
-  async create(data: IBlockFaq) {
+class BlockFaq implements IBlockService<BlockFaqType> {
+  async create(data: BlockFaqType) {
     const post = await new BlockFaqModel(data);
     await post.save();
 
@@ -13,7 +13,7 @@ class BlockFaq implements IBlockService<IBlockFaq> {
     };
   }
 
-  async update(data: IBlockFaq) {
+  async update(data: BlockFaqType) {
     await BlockFaqModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Block faq course has updated",

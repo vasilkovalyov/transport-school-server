@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockTeamEducationModel, IBlockTeamEducation } from "../../models";
+import { BlockTeamEducationModel, BlockTeamEducationType } from "../../models";
 
-class BlockTeamEducation implements IBlockService<IBlockTeamEducation> {
-  async create(data: IBlockTeamEducation) {
+class BlockTeamEducation implements IBlockService<BlockTeamEducationType> {
+  async create(data: BlockTeamEducationType) {
     const post = await new BlockTeamEducationModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockTeamEducation implements IBlockService<IBlockTeamEducation> {
     };
   }
 
-  async update(data: IBlockTeamEducation) {
+  async update(data: BlockTeamEducationType) {
     await BlockTeamEducationModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block team education course has updated",

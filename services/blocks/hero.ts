@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockHeroModel, IBlockHero } from "../../models";
+import { BlockHeroModel, BlockHeroType } from "../../models";
 
-class BlockHero implements IBlockService<IBlockHero> {
-  async create(data: IBlockHero) {
+class BlockHero implements IBlockService<BlockHeroType> {
+  async create(data: BlockHeroType) {
     const post = await new BlockHeroModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockHero implements IBlockService<IBlockHero> {
     };
   }
 
-  async update(data: IBlockHero) {
+  async update(data: BlockHeroType) {
     await BlockHeroModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block hero has updated",

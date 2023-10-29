@@ -1,12 +1,12 @@
 import { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { baseSchema, BlockType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockWhoTeach extends IBlock {
+export type BlockWhoTeachType = BlockType & {
   rich_text: string;
-}
+};
 
-export const BlockWhoTeachSchema = new Schema<IBlockWhoTeach>({
+export const BlockWhoTeachSchema = new Schema<BlockWhoTeachType>({
   rich_text: { type: String, default: null },
   block_name: { type: String, default: BlocsEnum.BlockWhoTeach, immutable: true },
 });

@@ -1,10 +1,10 @@
 import { BlockHeroModel, BlockTeamEducationModel, BlockRequirementModel } from "../../models";
 import { getBlockContactsPublicData, getBlockServicesPublicData } from "../public/reuse-blocks";
 
-import { IPage } from "./type";
+import { PageType } from "./type";
 
 class PagePriceService {
-  async getPage(): Promise<IPage> {
+  async getPage(): Promise<PageType> {
     const page = "price";
     const params = { block_page: page, publish: true };
 

@@ -1,12 +1,12 @@
 import { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { baseSchema, BlockType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockBlog extends IBlock {
+export type BlockBlogType = BlockType & {
   post_number: number;
-}
+};
 
-export const BlockBlogSchema = new Schema<IBlockBlog>({
+export const BlockBlogSchema = new Schema<BlockBlogType>({
   post_number: { type: Number, default: null },
   block_name: { type: String, default: BlocsEnum.BlockBlog, immutable: true },
 });

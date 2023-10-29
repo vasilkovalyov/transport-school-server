@@ -1,9 +1,9 @@
 import { IBlockService } from "./block";
-import { BlockAchivmentsModel, IBlockAchivments } from "../../models";
+import { BlockAchivmentsModel, BlockAchivmentsType } from "../../models";
 import { ReuseBlockAchivmentModel } from "../../models/reuse-blocks";
 
-class BlockAchivments implements IBlockService<IBlockAchivments> {
-  async create(data: IBlockAchivments) {
+class BlockAchivments implements IBlockService<BlockAchivmentsType> {
+  async create(data: BlockAchivmentsType) {
     const post = await new BlockAchivmentsModel(data);
     await post.save();
 
@@ -13,7 +13,7 @@ class BlockAchivments implements IBlockService<IBlockAchivments> {
     };
   }
 
-  async update(data: IBlockAchivments) {
+  async update(data: BlockAchivmentsType) {
     await BlockAchivmentsModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Block achivments course has updated",

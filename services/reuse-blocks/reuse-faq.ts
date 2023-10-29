@@ -1,7 +1,7 @@
-import { ReuseBlockFaqModel, IReuseBlockFaq } from "../../models/reuse-blocks";
+import { ReuseBlockFaqModel, ReuseBlockFaqType } from "../../models/reuse-blocks";
 
 class ReuseBlockFaq {
-  async update(data: IReuseBlockFaq) {
+  async update(data: ReuseBlockFaqType) {
     const post = await ReuseBlockFaqModel.findOne();
 
     if (!post) {

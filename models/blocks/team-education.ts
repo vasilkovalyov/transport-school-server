@@ -1,8 +1,8 @@
 import mongoose, { Schema, model } from "mongoose";
-import { baseSchema, IBlock } from "./base-model";
+import { baseSchema, BlockType } from "./base-model";
 import { BlocsEnum } from "./block-enum.type";
 
-export interface IBlockTeamEducation extends IBlock {
+export type BlockTeamEducationType = BlockType & {
   subheading: string;
   education_list: {
     heading: string;
@@ -10,7 +10,7 @@ export interface IBlockTeamEducation extends IBlock {
     discount: string;
   }[];
   use_cta_link: boolean;
-}
+};
 
 const listEducationSchema = new mongoose.Schema({
   heading: {
@@ -27,7 +27,7 @@ const listEducationSchema = new mongoose.Schema({
   },
 });
 
-export const BlockTeamEducationSchema = new Schema<IBlockTeamEducation>({
+export const BlockTeamEducationSchema = new Schema<BlockTeamEducationType>({
   subheading: { type: String, default: null },
   education_list: [listEducationSchema],
   use_cta_link: { type: Boolean, default: null },

@@ -1,9 +1,9 @@
 import { IBlockService } from "./block";
-import { BlockReviewsModel, IBlockReviews } from "../../models";
+import { BlockReviewsModel, BlockReviewsType } from "../../models";
 import { ReuseBlockReviewModel } from "../../models/reuse-blocks";
 
-class BlockReviews implements IBlockService<IBlockReviews> {
-  async create(data: IBlockReviews) {
+class BlockReviews implements IBlockService<BlockReviewsType> {
+  async create(data: BlockReviewsType) {
     const post = await new BlockReviewsModel(data);
     await post.save();
 
@@ -13,7 +13,7 @@ class BlockReviews implements IBlockService<IBlockReviews> {
     };
   }
 
-  async update(data: IBlockReviews) {
+  async update(data: BlockReviewsType) {
     await BlockReviewsModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block reviews course has updated",

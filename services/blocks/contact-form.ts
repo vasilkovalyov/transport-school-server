@@ -1,8 +1,8 @@
 import { IBlockService } from "./block";
-import { BlockContactFormModel, IBlockContactForm } from "../../models";
+import { BlockContactFormModel, BlockContactFormType } from "../../models";
 
-class BlockContactForm implements IBlockService<IBlockContactForm> {
-  async create(data: IBlockContactForm) {
+class BlockContactForm implements IBlockService<BlockContactFormType> {
+  async create(data: BlockContactFormType) {
     const post = await new BlockContactFormModel(data);
     await post.save();
 
@@ -12,7 +12,7 @@ class BlockContactForm implements IBlockService<IBlockContactForm> {
     };
   }
 
-  async update(data: IBlockContactForm) {
+  async update(data: BlockContactFormType) {
     await BlockContactFormModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
     return {
       message: "Block contact form course has updated",
