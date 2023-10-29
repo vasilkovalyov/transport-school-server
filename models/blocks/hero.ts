@@ -6,6 +6,7 @@ export type BlockHeroType = BlockType & {
   subheading: string;
   use_link_to_contact_page: boolean;
   use_phone_cta: boolean;
+  image?: string;
 };
 
 export const BlockHeroSchema = new Schema<BlockHeroType>({
@@ -13,6 +14,7 @@ export const BlockHeroSchema = new Schema<BlockHeroType>({
   use_link_to_contact_page: { type: Boolean, default: null },
   use_phone_cta: { type: Boolean, default: null },
   block_name: { type: String, default: BlocsEnum.BlockHero, immutable: true },
+  image: { type: String, default: null },
 });
 
 BlockHeroSchema.add(baseSchema);

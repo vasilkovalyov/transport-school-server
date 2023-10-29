@@ -1,9 +1,20 @@
 import { IBlockService } from "./block";
 import { BlockHeroModel, BlockHeroType } from "../../models";
+import { uploadImage } from "../../services/file-uploader";
 
 class BlockHero implements IBlockService<BlockHeroType> {
   async create(data: BlockHeroType) {
-    const post = await new BlockHeroModel(data);
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    const post = await new BlockHeroModel({
+      ...data,
+      image,
+    });
     await post.save();
 
     return {
@@ -13,7 +24,21 @@ class BlockHero implements IBlockService<BlockHeroType> {
   }
 
   async update(data: BlockHeroType) {
-    await BlockHeroModel.findOneAndUpdate({ block_page: data.block_page }, data, { new: true });
+    let image = "";
+
+    if (data.image) {
+      const response = await uploadImage(data.image);
+      image = response.secure_url;
+    }
+
+    await BlockHeroModel.findOneAndUpdate(
+      { block_page: data.block_page },
+      {
+        ...data,
+        image,
+      },
+      { new: true },
+    );
     return {
       message: "Block hero has updated",
     };
@@ -31,6 +56,7 @@ class BlockHero implements IBlockService<BlockHeroType> {
 
   async getBlock(page: string) {
     const post = await BlockHeroModel.findOne({ block_page: page });
+    console.log("post", post);
     return post;
   }
 }
