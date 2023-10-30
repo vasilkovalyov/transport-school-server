@@ -32,7 +32,7 @@ export async function getBlockFaqPublicData(page: string) {
   let blockData: unknown = null;
 
   if (block) {
-    const reuseBlock = await ReuseBlockFaqModel.findOne().select("heading list_faq");
+    const reuseBlock = await ReuseBlockFaqModel.findOne().select("heading list_faq image");
 
     blockData = {
       _id: block?._id,
@@ -42,6 +42,7 @@ export async function getBlockFaqPublicData(page: string) {
       publish: block?.publish,
       heading: reuseBlock?.heading,
       list_faq: reuseBlock?.list_faq,
+      image: reuseBlock?.image,
     };
     return blockData;
   }
