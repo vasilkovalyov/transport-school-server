@@ -46,10 +46,44 @@ class LessonScheduleService {
   async getPaginatedPosts(size: number, page: number) {
     const total_count = await LessonScheduleModel.countDocuments();
     const { nextPage, total_pages, skip_size } = getPaginationInfo(size, page, total_count);
-    const lessons = await LessonScheduleModel.find({}, null, { sort: { date_start_event: 1 } })
+    const lessons = await LessonScheduleModel.aggregate([
+      {
+        $project: {
+          heading: 1,
+          type_group: 1,
+          type_lesson: 1,
+          days: 1,
+          time_start: 1,
+          time_end: 1,
+          date_start_event: 1,
+          max_people: 1,
+          students: {
+            $cond: {
+              if: { $isArray: "$students" },
+              then: { $size: "$students" },
+              else: 0,
+            },
+          },
+        },
+      },
+      {
+        $sort: { date_start_event: 1 },
+      },
+    ])
       .skip(skip_size)
       .limit(size)
       .exec();
+
+    // const lessons = await LessonScheduleModel.find(
+    //   {},
+    //   "heading type_group type_lesson days time_start time_end date_start_event students max_people",
+    //   {
+    //     sort: { date_start_event: 1 },
+    //   },
+    // )
+    //   .skip(skip_size)
+    //   .limit(size)
+    //   .exec();
 
     return {
       total_count,

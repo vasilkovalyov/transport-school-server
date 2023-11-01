@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { StudentType } from "./student";
 
 export type LessonType = "offline" | "online";
 
@@ -7,11 +8,12 @@ export type LessonScheduleType = {
   heading: string;
   type_group: string;
   type_lesson: LessonType;
-  day_start: number;
-  day_end: number;
+  days: number[];
   time_start: string;
   time_end: string;
   date_start_event: string;
+  max_people: number;
+  students: Schema.Types.ObjectId[];
 };
 
 export const LessonScheduleSchema = new Schema<LessonScheduleType>(
@@ -19,11 +21,19 @@ export const LessonScheduleSchema = new Schema<LessonScheduleType>(
     heading: { type: String, required: true, unique: true },
     type_group: { type: String, default: null },
     type_lesson: { type: String, default: null },
-    day_start: { type: Number, default: null },
-    day_end: { type: Number, default: null },
+    days: [{ type: Number, default: null }],
     time_start: { type: String, default: null },
     time_end: { type: String, default: null },
     date_start_event: { type: String, default: null },
+    max_people: { type: Number, default: null },
+    students: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Student",
+        required: true,
+        unique: true,
+      },
+    ],
   },
   {
     timestamps: true,
