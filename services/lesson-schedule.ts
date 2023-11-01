@@ -1,4 +1,4 @@
-import { LessonScheduleType, LessonScheduleModel } from "../models";
+import { LessonScheduleType, LessonScheduleModel, StudentModel } from "../models";
 import { getPaginationInfo } from "../utils/pagination";
 
 class LessonScheduleService {
@@ -41,6 +41,30 @@ class LessonScheduleService {
   async getLessonSchedule(id: string) {
     const lesson_schedules = await LessonScheduleModel.findOne({ _id: id });
     return lesson_schedules;
+  }
+
+  async getStudents(id: string) {
+    const lessonStudents = await LessonScheduleModel.findById(id).select("students");
+    const students = await StudentModel.find({
+      _id: { $in: lessonStudents?.students },
+    });
+
+    // .populate({
+    //   path: "students",
+    //   select: "_id name phone email",
+    // })
+    // .exec();
+    return students;
+  }
+
+  async deleteStudent(lessonId: string, studentId: string) {
+    const updatedPost = await LessonScheduleModel.findOneAndUpdate(
+      { _id: lessonId },
+      { $pull: { students: studentId } },
+      { new: true },
+    );
+
+    return true;
   }
 
   async getPaginatedPosts(size: number, page: number) {

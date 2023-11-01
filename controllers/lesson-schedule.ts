@@ -73,6 +73,35 @@ class LessonScheduleController {
       });
     }
   }
+
+  async getStudents(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const response = await this.lessonScheduleService.getStudents(id);
+      return res.status(status.SUCCESS).json(response);
+    } catch (e) {
+      if (!(e instanceof Error)) return;
+      return res.status(status.BAD_REQUEST).json({
+        error: e.message,
+      });
+    }
+  }
+
+  async deleteStudent(req: Request, res: Response) {
+    try {
+      const { id_lesson, id_student } = req.query;
+      if (id_lesson && id_student) {
+        const response = await this.lessonScheduleService.deleteStudent(id_lesson as string, id_student as string);
+        return res.status(status.SUCCESS).json(response);
+      }
+      throw new Error("You have to add id_student and id_lesson");
+    } catch (e) {
+      if (!(e instanceof Error)) return;
+      return res.status(status.BAD_REQUEST).json({
+        error: e.message,
+      });
+    }
+  }
 }
 
 export default LessonScheduleController;
