@@ -11,6 +11,7 @@ import {
   dashboardPostRoute,
   dashboardLessonScheduleRoute,
   dashboardServiceRoute,
+  dashboardOverviewRoute,
   dashboardCommonContactRoute,
 } from "./routes/dashboard";
 
@@ -89,6 +90,7 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", dashboardServiceRoute);
   server.use("/api/dashboard", dashboardLessonScheduleRoute);
   server.use("/api/dashboard", dashboardCommonContactRoute);
+  server.use("/api/dashboard", dashboardOverviewRoute);
 
   server.use("/api/dashboard", blockAboutRoute);
   server.use("/api/dashboard", blockAboutCourseRoute);

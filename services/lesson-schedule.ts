@@ -48,12 +48,6 @@ class LessonScheduleService {
     const students = await StudentModel.find({
       _id: { $in: lessonStudents?.students },
     });
-
-    // .populate({
-    //   path: "students",
-    //   select: "_id name phone email",
-    // })
-    // .exec();
     return students;
   }
 
@@ -97,17 +91,6 @@ class LessonScheduleService {
       .skip(skip_size)
       .limit(size)
       .exec();
-
-    // const lessons = await LessonScheduleModel.find(
-    //   {},
-    //   "heading type_group type_lesson days time_start time_end date_start_event students max_people",
-    //   {
-    //     sort: { date_start_event: 1 },
-    //   },
-    // )
-    //   .skip(skip_size)
-    //   .limit(size)
-    //   .exec();
 
     return {
       total_count,

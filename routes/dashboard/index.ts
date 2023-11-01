@@ -3,3 +3,4 @@ export { default as dashboardCommonContactRoute } from "./common-contact";
 export { default as dashboardLessonScheduleRoute } from "./lesson-schedule";
 export { default as dashboardPostRoute } from "./post";
 export { default as dashboardServiceRoute } from "./service";
+export { default as dashboardOverviewRoute } from "./overview";

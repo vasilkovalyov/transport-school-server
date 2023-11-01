@@ -5,6 +5,7 @@ export { default as PostService } from "./post";
 export { default as ServiceServices } from "./service";
 export { default as LessonScheduleService } from "./lesson-schedule";
 export { default as CommonContactsService } from "./common-contacts";
+export { default as OverviewService } from "./overview";
 
 export * from "./blocks";
 export * from "./reuse-blocks";
