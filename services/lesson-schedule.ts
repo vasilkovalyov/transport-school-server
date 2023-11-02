@@ -100,6 +100,37 @@ class LessonScheduleService {
       posts: lessons,
     };
   }
+
+  async getLessonsCutDownInfo() {
+    const lessons = await LessonScheduleModel.aggregate([
+      {
+        $project: {
+          heading: 1,
+          time_start: 1,
+          time_end: 1,
+          date_start_event: 1,
+          type_group: 1,
+          type_lesson: 1,
+          days: 1,
+          max_people: 1,
+          students: {
+            $cond: {
+              if: { $isArray: "$students" },
+              then: { $size: "$students" },
+              else: 0,
+            },
+          },
+        },
+      },
+      {
+        $sort: { date_start_event: 1 },
+      },
+    ]);
+
+    return {
+      lessons: lessons,
+    };
+  }
 }
 
 export default LessonScheduleService;

@@ -15,14 +15,7 @@ class OverviewService {
     };
   }
 
-  async getUpcommingEvents() {
-    // const lessons = await LessonScheduleModel.find()
-    //   .limit(4)
-    //   .select("_id date_start_event time_start time_end heading max_people students");
-
-    // return {
-    //   lessons: lessons,
-    // };
+  async getUpcomingEvents() {
     const lessons = await LessonScheduleModel.aggregate([
       {
         $project: {

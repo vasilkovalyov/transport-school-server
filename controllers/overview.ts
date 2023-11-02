@@ -21,9 +21,9 @@ class OverviewController {
     }
   }
 
-  async getUpcommingEvents(req: Request, res: Response) {
+  async getUpcomingEvents(req: Request, res: Response) {
     try {
-      const response = await this.service.getUpcommingEvents();
+      const response = await this.service.getUpcomingEvents();
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
