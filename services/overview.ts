@@ -16,7 +16,14 @@ class OverviewService {
   }
 
   async getUpcomingEvents() {
+    const currentDate = new Date();
+
     const lessons = await LessonScheduleModel.aggregate([
+      {
+        $match: {
+          date_start_event: { $gte: currentDate },
+        },
+      },
       {
         $project: {
           heading: 1,

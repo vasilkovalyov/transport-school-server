@@ -10,6 +10,9 @@ class StudentService {
 
     const studentFromDb = await StudentModel.findOne({ email: props.email });
 
+    const successMessage = "Вы успешно загеристрировались на урок, мы отправили сообщение о регистрации вам на  почту";
+    const errorMessage = "Ошибка! Вы уже зарегистрированы за этот урок";
+
     if (!studentFromDb) {
       const user = await new StudentModel({
         ...props,
@@ -19,20 +22,20 @@ class StudentService {
       lessonFromDb.students.push(user.id);
       await lessonFromDb.save();
       return {
-        message: "User has created",
+        message: successMessage,
       };
     }
     const existLesson = studentFromDb.lessons.some((item) => item.toString() === lesson);
 
     if (existLesson) {
-      throw new Error("Lesson already created for user");
+      throw new Error(errorMessage);
     }
 
     studentFromDb.lessons.push(lesson as unknown as Schema.Types.ObjectId);
     await studentFromDb.save();
 
     return {
-      message: "Lesson has been added for user",
+      message: successMessage,
     };
   }
 

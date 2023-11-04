@@ -192,7 +192,7 @@ export async function getBlockLessonSchedulesPublicData(page: string, pageNumber
   let blockData: unknown = null;
 
   if (blockScheduleLesson) {
-    const responsePosts = await lessonScheduleService.getPaginatedPosts(
+    const responsePosts = await lessonScheduleService.getUpcomingPaginatedPosts(
       blockScheduleLesson.post_number || 3,
       pageNumber,
     );
