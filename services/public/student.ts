@@ -1,9 +1,11 @@
 import { Schema } from "mongoose";
 import { StudentCreateType, StudentModel, LessonScheduleModel } from "../../models";
-import { sendSuccessGetLessonEmail } from "../../mailer";
+import { MailService } from "../../services";
 
 class StudentService {
   async create({ lesson, ...props }: StudentCreateType) {
+    const mailService = new MailService();
+
     const lessonFromDb = await LessonScheduleModel.findById(lesson);
     if (!lessonFromDb) {
       throw new Error("Lesson not found");
@@ -20,34 +22,44 @@ class StudentService {
         lessons: [lesson],
       });
       await user.save();
+
       lessonFromDb.students.push(user.id);
       await lessonFromDb.save();
-      await sendSuccessGetLessonEmail({
-        lesson: lessonFromDb,
-        user: {
-          name: user.name,
-          email: user.email,
-        },
+
+      await mailService.sendMailStudentRegistrationOnLesson(props.email, {
+        name: props.name,
+        date_start_event: lessonFromDb.date_start_event,
+        days: lessonFromDb.days,
+        heading: lessonFromDb.heading,
+        time_end: lessonFromDb.time_end,
+        time_start: lessonFromDb.time_start,
+        type_group: lessonFromDb.type_group,
+        type_lesson: lessonFromDb.type_lesson,
       });
+
       return {
         message: successMessage,
       };
     }
-    console.log("studentFromDb", studentFromDb);
+
     const existLesson = studentFromDb.lessons.some((item) => item.toString() === lesson);
 
-    if (existLesson) {
-      throw new Error(errorMessage);
-    }
-
+    if (existLesson) throw new Error(errorMessage);
     studentFromDb.lessons.push(lesson as unknown as Schema.Types.ObjectId);
     await studentFromDb.save();
-    await sendSuccessGetLessonEmail({
-      user: {
-        name: props.name,
-        email: props.email,
-      },
-      lesson: lessonFromDb,
+
+    lessonFromDb.students.push(studentFromDb.id);
+    await lessonFromDb.save();
+
+    await mailService.sendMailStudentRegistrationOnLesson(props.email, {
+      name: props.name,
+      date_start_event: lessonFromDb.date_start_event,
+      days: lessonFromDb.days,
+      heading: lessonFromDb.heading,
+      time_end: lessonFromDb.time_end,
+      time_start: lessonFromDb.time_start,
+      type_group: lessonFromDb.type_group,
+      type_lesson: lessonFromDb.type_lesson,
     });
 
     return {

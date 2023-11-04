@@ -11,9 +11,7 @@ class BlockRequirement implements IBlockService<BlockRequirementType> {
       let image = "";
 
       if (item.image) {
-        console.log(item.image);
         const response = await uploadImage(item.image);
-        console.log(response);
         image = response.secure_url;
       }
 
