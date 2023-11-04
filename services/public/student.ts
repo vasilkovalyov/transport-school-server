@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 import { StudentCreateType, StudentModel, LessonScheduleModel } from "../../models";
+import { sendSuccessGetLessonEmail } from "../../mailer";
 
 class StudentService {
   async create({ lesson, ...props }: StudentCreateType) {
@@ -21,10 +22,18 @@ class StudentService {
       await user.save();
       lessonFromDb.students.push(user.id);
       await lessonFromDb.save();
+      await sendSuccessGetLessonEmail({
+        lesson: lessonFromDb,
+        user: {
+          name: user.name,
+          email: user.email,
+        },
+      });
       return {
         message: successMessage,
       };
     }
+    console.log("studentFromDb", studentFromDb);
     const existLesson = studentFromDb.lessons.some((item) => item.toString() === lesson);
 
     if (existLesson) {
@@ -33,6 +42,13 @@ class StudentService {
 
     studentFromDb.lessons.push(lesson as unknown as Schema.Types.ObjectId);
     await studentFromDb.save();
+    await sendSuccessGetLessonEmail({
+      user: {
+        name: props.name,
+        email: props.email,
+      },
+      lesson: lessonFromDb,
+    });
 
     return {
       message: successMessage,

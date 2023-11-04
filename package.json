@@ -54,6 +54,7 @@
     "express-fileupload": "^1.4.1",
     "joi": "^17.10.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.5.3"
+    "mongoose": "^7.5.3",
+    "nodemailer": "^6.9.7"
   }
 }
