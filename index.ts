@@ -85,6 +85,12 @@ import databaseConnect from "./database";
     }),
   );
 
+  server.get("/", (req, res) => {
+    return res.json({
+      message: "node js message",
+    });
+  });
+
   server.use("/api/dashboard", dashboardAuthRoute);
   server.use("/api/dashboard", dashboardPostRoute);
   server.use("/api/dashboard", dashboardServiceRoute);
