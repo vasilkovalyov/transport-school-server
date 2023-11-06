@@ -73,6 +73,8 @@ import databaseConnect from "./database";
   const WEBSITE_URL = process.env.WEBSITE_API_URL || "http://localhost:3000";
   const ADMIN_API_URL = process.env.WEBSITE_API_URL || "http://localhost:5173";
 
+  console.log("WEBSITE_URL = ", WEBSITE_URL, "ADMIN_API_URL = ", ADMIN_API_URL);
+
   dotenv.config();
 
   server.use(bodyParser.json({ limit: "50mb" }));
