@@ -71,7 +71,7 @@ import databaseConnect from "./database";
   const server: Express = express();
   const PORT = process.env.PORT || 4000;
   const WEBSITE_URL = process.env.WEBSITE_API_URL || "http://localhost:3000";
-  const ADMIN_API_URL = process.env.WEBSITE_API_URL || "http://localhost:5173";
+  const ADMIN_API_URL = process.env.ADMIN_API_URL || "http://localhost:5173";
 
   console.log("WEBSITE_URL = ", WEBSITE_URL, "ADMIN_API_URL = ", ADMIN_API_URL);
 
