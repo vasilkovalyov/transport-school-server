@@ -70,10 +70,18 @@ import databaseConnect from "./database";
 (async () => {
   const server: Express = express();
   const PORT = process.env.PORT || 4000;
+  const WEBSITE_URL = process.env.WEBSITE_API_URL || "http://localhost:3000";
+  const ADMIN_API_URL = process.env.WEBSITE_API_URL || "http://localhost:5173";
+
   dotenv.config();
 
   server.use(bodyParser.json({ limit: "50mb" }));
-  server.use(cors({ credentials: true, origin: ["http://localhost:5173", "http://localhost:3000"] }));
+  server.use(
+    cors({
+      credentials: true,
+      origin: [WEBSITE_URL, ADMIN_API_URL],
+    }),
+  );
   server.use(express.urlencoded({ extended: true }));
   server.use(compression());
   server.use(cookieParser());
