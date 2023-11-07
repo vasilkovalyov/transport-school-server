@@ -24,16 +24,7 @@ import {
   studentRoute,
 } from "./routes/public";
 
-import {
-  pageHomeRoute,
-  pageAboutCourseRoute,
-  pageBlogRoute,
-  pageCompanyRoute,
-  pageContactRoute,
-  pagePriceRoute,
-  pageScheduleRoute,
-  pageBlogSingleRoute,
-} from "./routes/pages";
+import pagesRoute from "./routes/pages";
 
 import {
   reuseBlockAchivmentsRoute,
@@ -138,14 +129,7 @@ import databaseConnect from "./database";
   server.use("/api", lessonScheduleRoute);
   server.use("/api", studentRoute);
 
-  server.use("/api", pageHomeRoute);
-  server.use("/api", pageAboutCourseRoute);
-  server.use("/api", pageBlogRoute);
-  server.use("/api", pageCompanyRoute);
-  server.use("/api", pageContactRoute);
-  server.use("/api", pagePriceRoute);
-  server.use("/api", pageScheduleRoute);
-  server.use("/api", pageBlogSingleRoute);
+  server.use("/api", pagesRoute);
 
   server.use("/api", commonContactRoute);
 
