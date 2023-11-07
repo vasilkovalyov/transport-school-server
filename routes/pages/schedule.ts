@@ -5,6 +5,6 @@ import authMiddleware from "../../middlewares/auth";
 const router = express.Router();
 const controller = new PageScheduleController();
 
-router.get("/page/schedule", (req, res) => controller.getPage(req, res));
+router.get("/page/schedule", authMiddleware, (req, res) => controller.getPage(req, res));
 
 export default router;

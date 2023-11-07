@@ -1,4 +1,4 @@
 export default {
-  expiresAccessToken: "1d",
-  expiresRefreshToken: "10m",
+  expiresAccessToken: "15m",
+  expiresRefreshToken: "30d",
 };

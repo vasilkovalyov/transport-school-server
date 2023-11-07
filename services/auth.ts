@@ -7,6 +7,19 @@ import { AuthMessages } from "../constants/response-messages";
 import { UserLoginType } from "../types/admin";
 
 class AuthService {
+  async hasAdmin() {
+    const admin = await UserModel.find();
+    if (!admin.length) {
+      return {
+        hasAdmin: false,
+      };
+    }
+
+    return {
+      hasAdmin: true,
+    };
+  }
+
   async login({ login, password }: UserLoginType) {
     const userModel = await UserModel.findOne({
       login: login,

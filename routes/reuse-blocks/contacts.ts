@@ -5,7 +5,7 @@ import authMiddleware from "../../middlewares/auth";
 const router = express.Router();
 const controller = new ReuseBlockContactsController();
 
-router.patch("/block/reuse-contacts", (req, res) => controller.update(req, res));
-router.get("/block/reuse-contacts", (req, res) => controller.getBlock(req, res));
+router.patch("/block/reuse-contacts", authMiddleware, (req, res) => controller.update(req, res));
+router.get("/block/reuse-contacts", authMiddleware, (req, res) => controller.getBlock(req, res));
 
 export default router;

@@ -5,6 +5,6 @@ import authMiddleware from "../../middlewares/auth";
 const router = express.Router();
 const controller = new PageBlogSingleController();
 
-router.get("/page/blog/:slug", (req, res) => controller.getPage(req, res));
+router.get("/page/blog/:slug", authMiddleware, (req, res) => controller.getPage(req, res));
 
 export default router;

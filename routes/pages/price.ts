@@ -5,6 +5,6 @@ import authMiddleware from "../../middlewares/auth";
 const router = express.Router();
 const controller = new PagePriceController();
 
-router.get("/page/price", (req, res) => controller.getPage(req, res));
+router.get("/page/price", authMiddleware, (req, res) => controller.getPage(req, res));
 
 export default router;

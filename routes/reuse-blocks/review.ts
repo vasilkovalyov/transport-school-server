@@ -5,7 +5,7 @@ import authMiddleware from "../../middlewares/auth";
 const router = express.Router();
 const controller = new ReuseBlockReviewController();
 
-router.patch("/block/reuse-review", (req, res) => controller.update(req, res));
-router.get("/block/reuse-review", (req, res) => controller.getBlock(req, res));
+router.patch("/block/reuse-review", authMiddleware, (req, res) => controller.update(req, res));
+router.get("/block/reuse-review", authMiddleware, (req, res) => controller.getBlock(req, res));
 
 export default router;

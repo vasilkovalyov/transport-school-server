@@ -5,6 +5,6 @@ import authMiddleware from "../../middlewares/auth";
 const router = express.Router();
 const controller = new PageAboutCourseController();
 
-router.get("/page/about-course", (req, res) => controller.getPage(req, res));
+router.get("/page/about-course", authMiddleware, (req, res) => controller.getPage(req, res));
 
 export default router;

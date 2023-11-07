@@ -5,10 +5,10 @@ import authMiddleware from "../../middlewares/auth";
 const router = express.Router();
 const controller = new BlockRequirementController();
 
-router.post("/block/requirement-create", (req, res) => controller.create(req, res));
-router.patch("/block/requirement-update", (req, res) => controller.update(req, res));
-router.get("/blocks/requirement/:page", (req, res) => controller.getBlock(req, res));
-router.patch("/block/requirement/publish", (req, res) => controller.publish(req, res));
-router.patch("/block/requirement/unpublish", (req, res) => controller.unpublish(req, res));
+router.post("/block/requirement-create", authMiddleware, (req, res) => controller.create(req, res));
+router.patch("/block/requirement-update", authMiddleware, (req, res) => controller.update(req, res));
+router.get("/blocks/requirement/:page", authMiddleware, (req, res) => controller.getBlock(req, res));
+router.patch("/block/requirement/publish", authMiddleware, (req, res) => controller.publish(req, res));
+router.patch("/block/requirement/unpublish", authMiddleware, (req, res) => controller.unpublish(req, res));
 
 export default router;

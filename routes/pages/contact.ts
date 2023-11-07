@@ -5,6 +5,6 @@ import authMiddleware from "../../middlewares/auth";
 const router = express.Router();
 const controller = new PageContactController();
 
-router.get("/page/contact", (req, res) => controller.getPage(req, res));
+router.get("/page/contact", authMiddleware, (req, res) => controller.getPage(req, res));
 
 export default router;
