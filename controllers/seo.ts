@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import status from "../../utils/status";
-import { SeoService } from "../../services/public";
+import status from "../utils/status";
+import { SeoService } from "../services";
 
 class SeoController {
   service: SeoService;

@@ -1,6 +1,6 @@
 import express from "express";
-import { SeoController } from "../../controllers/public";
-import authMiddleware from "../../middlewares/auth";
+import { SeoController } from "../controllers";
+import authMiddleware from "../middlewares/auth";
 
 const router = express.Router();
 const controller = new SeoController();

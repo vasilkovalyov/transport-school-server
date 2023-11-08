@@ -1,3 +1,4 @@
+import { BlockContactsModel } from "../../models";
 import { ReuseBlockContactsModel, ReuseBlockContactsType } from "../../models/reuse-blocks";
 import { uploadImage } from "../file-uploader";
 
@@ -40,6 +41,34 @@ class ReuseBlockContacts {
   async getBlock(page: string) {
     const post = await ReuseBlockContactsModel.findOne({ block_page: page });
     return post;
+  }
+
+  async getBlockForPublic(page: string) {
+    const block = await BlockContactsModel.findOne({ block_page: page, publish: true }).select(
+      "_id block_name block_order block_page publish",
+    );
+
+    let blockData: unknown = null;
+
+    if (block) {
+      const reuseBlock = await ReuseBlockContactsModel.findOne().select("heading address phone email map_url");
+
+      blockData = {
+        _id: block?._id,
+        block_name: block?.block_name,
+        block_order: block?.block_order,
+        block_page: block?.block_page,
+        publish: block?.publish,
+        heading: reuseBlock?.heading,
+        address: reuseBlock?.address,
+        phone: reuseBlock?.phone,
+        email: reuseBlock?.email,
+        map_url: reuseBlock?.map_url,
+      };
+      return blockData;
+    }
+
+    return null;
   }
 }
 

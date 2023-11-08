@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 import status from "../../utils/status";
-import { LessonScheduleService } from "../../services";
+import { LessonService } from "../../services";
 
-class LessonScheduleController {
-  service: LessonScheduleService;
+class LessonController {
+  service: LessonService;
   constructor() {
-    this.service = new LessonScheduleService();
+    this.service = new LessonService();
   }
 
-  async getUpcomingPosts(req: Request, res: Response) {
+  async getUpcomingLessons(req: Request, res: Response) {
     try {
       const { size, page } = req.query as unknown as { size: string; page: string };
-      const response = await this.service.getUpcomingPaginatedPosts(parseInt(size), parseInt(page));
+      const response = await this.service.getUpcomingLessons(parseInt(size), parseInt(page));
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -21,10 +21,10 @@ class LessonScheduleController {
     }
   }
 
-  async getPaginatedPosts(req: Request, res: Response) {
+  async getLessonsPaginated(req: Request, res: Response) {
     try {
       const { size, page } = req.query as unknown as { size: string; page: string };
-      const response = await this.service.getPaginatedPosts(parseInt(size), parseInt(page));
+      const response = await this.service.getLessonsPaginated(parseInt(size), parseInt(page));
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -34,9 +34,9 @@ class LessonScheduleController {
     }
   }
 
-  async getLessonsFormEvents(req: Request, res: Response) {
+  async getLessonsForCtaForm(req: Request, res: Response) {
     try {
-      const response = await this.service.getLessonsFormEvents();
+      const response = await this.service.getLessonsForCtaForm();
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -47,4 +47,4 @@ class LessonScheduleController {
   }
 }
 
-export default LessonScheduleController;
+export default LessonController;

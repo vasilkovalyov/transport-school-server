@@ -1,10 +1,10 @@
-import { PostModel, ServiceModel, LessonScheduleModel, StudentModel } from "../models";
+import { PostModel, ServiceModel, LessonModel, StudentModel } from "../models";
 
 class OverviewService {
   async getInfo() {
     const blogsCount = await PostModel.countDocuments();
     const servicesCount = await ServiceModel.countDocuments();
-    const lessonsCount = await LessonScheduleModel.countDocuments();
+    const lessonsCount = await LessonModel.countDocuments();
     const studentsCount = await StudentModel.countDocuments();
 
     return {
@@ -18,7 +18,7 @@ class OverviewService {
   async getUpcomingEvents() {
     const currentDate = new Date();
 
-    const lessons = await LessonScheduleModel.aggregate([
+    const lessons = await LessonModel.aggregate([
       {
         $match: {
           date_start_event: { $gte: currentDate },

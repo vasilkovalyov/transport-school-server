@@ -9,22 +9,15 @@ import fileUpload from "express-fileupload";
 import {
   dashboardAuthRoute,
   dashboardPostRoute,
-  dashboardLessonScheduleRoute,
+  dashboardLessonRoute,
   dashboardServiceRoute,
   dashboardOverviewRoute,
   dashboardCommonContactRoute,
 } from "./routes/dashboard";
 
-import {
-  seoRoute,
-  commonContactRoute,
-  reviewRoute,
-  postsRoute,
-  lessonScheduleRoute,
-  studentRoute,
-} from "./routes/public";
+import { commonContactRoute, postsRoute, lessonRoute } from "./routes/public";
 
-import pagesRoute from "./routes/pages";
+import { seoRoute, studentRoute, pagesRoute, reviewRoute } from "./routes";
 
 import {
   reuseBlockAchivmentsRoute,
@@ -93,7 +86,7 @@ import databaseConnect from "./database";
   server.use("/api/dashboard", dashboardAuthRoute);
   server.use("/api/dashboard", dashboardPostRoute);
   server.use("/api/dashboard", dashboardServiceRoute);
-  server.use("/api/dashboard", dashboardLessonScheduleRoute);
+  server.use("/api/dashboard", dashboardLessonRoute);
   server.use("/api/dashboard", dashboardCommonContactRoute);
   server.use("/api/dashboard", dashboardOverviewRoute);
 
@@ -126,7 +119,7 @@ import databaseConnect from "./database";
   server.use("/api", seoRoute);
   server.use("/api", reviewRoute);
   server.use("/api", postsRoute);
-  server.use("/api", lessonScheduleRoute);
+  server.use("/api", lessonRoute);
   server.use("/api", studentRoute);
 
   server.use("/api", pagesRoute);

@@ -20,7 +20,7 @@ export const StudentSchema = new Schema<StudentType>(
     lessons: [
       {
         type: Schema.Types.ObjectId,
-        ref: "LessonSchedule",
+        ref: "Lesson",
         required: true,
       },
     ],

@@ -1,12 +1,12 @@
 import { Schema } from "mongoose";
-import { StudentCreateType, StudentModel, LessonScheduleModel } from "../../models";
-import { MailService } from "../../services";
+import { StudentCreateType, StudentModel, LessonModel } from "../models";
+import { MailService } from ".";
 
 class StudentService {
   async create({ lesson, ...props }: StudentCreateType) {
     const mailService = new MailService();
 
-    const lessonFromDb = await LessonScheduleModel.findById(lesson);
+    const lessonFromDb = await LessonModel.findById(lesson);
     if (!lessonFromDb) {
       throw new Error("Lesson not found");
     }

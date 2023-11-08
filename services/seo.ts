@@ -1,4 +1,4 @@
-import { SeoType, SeoModel } from "../../models/public";
+import { SeoType, SeoModel } from "../models";
 
 class SeoService {
   async update(data: SeoType) {

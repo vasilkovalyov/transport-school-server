@@ -1,5 +1,5 @@
-import { ReviewType, ReviewModel } from "../../models/public";
-import { uploadImage } from "../file-uploader";
+import { ReviewType, ReviewModel } from "../models";
+import { uploadImage } from "./file-uploader";
 
 class ReviewService {
   async create(data: ReviewType) {

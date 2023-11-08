@@ -1,6 +1,6 @@
 import express from "express";
-import { ReviewController } from "../../controllers/public";
-import authMiddleware from "../../middlewares/auth";
+import { ReviewController } from "../controllers";
+import authMiddleware from "../middlewares/auth";
 
 const router = express.Router();
 const controller = new ReviewController();

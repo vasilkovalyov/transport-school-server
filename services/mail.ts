@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer";
 import dayjs from "dayjs";
 
-import { LessonScheduleType, StudentType } from "../models";
+import { LessonType, StudentType } from "../models";
 import { lessonType } from "../utils/common";
 import { shortDayNames } from "../utils/days";
 
 export type StudentEmailProps = Pick<
-  LessonScheduleType,
+  LessonType,
   "heading" | "date_start_event" | "days" | "time_start" | "time_end" | "type_group" | "type_lesson"
 > &
   Pick<StudentType, "name">;

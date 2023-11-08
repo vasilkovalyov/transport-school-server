@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import status from "../../utils/status";
-import { ReviewService } from "../../services/public";
+import status from "../utils/status";
+import { ReviewService } from "../services";
 
 class ReviewController {
   service: ReviewService;

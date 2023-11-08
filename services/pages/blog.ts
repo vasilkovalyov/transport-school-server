@@ -1,5 +1,5 @@
 import { BlockHeroModel } from "../../models";
-import { getBlockCtaPublicData, getBlockBlogPublicData } from "../public/reuse-blocks";
+import { ReuseBlockCtaService, ReuseBlockBlogService } from "../reuse-blocks";
 
 import { PageType } from "./type";
 
@@ -7,10 +7,13 @@ class PageBlogService {
   async getPage(): Promise<PageType> {
     const page = "blog";
     const params = { block_page: page, publish: true };
+    const reuseBlockCtaService = new ReuseBlockCtaService();
+    const reuseBlockBlogService = new ReuseBlockBlogService();
+
     const blockHero = await BlockHeroModel.findOne(params);
 
-    const blockBlogData = await getBlockBlogPublicData(page);
-    const blockCtaData = await getBlockCtaPublicData(page);
+    const blockBlogData = await reuseBlockBlogService.getBlockForPublic(page);
+    const blockCtaData = await reuseBlockCtaService.getBlockForPublic(page);
 
     const blocks = [blockHero, blockBlogData, blockCtaData].filter((item) => item);
 

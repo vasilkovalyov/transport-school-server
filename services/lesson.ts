@@ -1,17 +1,17 @@
-import { LessonScheduleType, LessonScheduleModel, StudentModel } from "../models";
+import { LessonType, LessonModel, StudentModel } from "../models";
 import { getPaginationInfo } from "../utils/pagination";
 
-type LessonScheduleCreateType = Omit<LessonScheduleType, "date_start_event"> & {
+type LessonCreateType = Omit<LessonType, "date_start_event"> & {
   date_start_event: string;
 };
 
-class LessonScheduleService {
-  async create(data: LessonScheduleCreateType) {
+class LessonService {
+  async create(data: LessonCreateType) {
     const [year, month, day] = data.date_start_event.split("-");
     const [hour, minutes] = data.time_start.split(":");
 
     const dateStartEvent = new Date(+year, +month - 1, +day, +hour, +minutes, 0);
-    const lesson_schedule = await new LessonScheduleModel({
+    const lesson_schedule = await new LessonModel({
       ...data,
       date_start_event: dateStartEvent,
       students: [],
@@ -24,18 +24,18 @@ class LessonScheduleService {
     };
   }
 
-  async update(data: LessonScheduleType) {
-    await LessonScheduleModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+  async update(data: LessonType) {
+    await LessonModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
     return {
       message: "Lesson schedule has updated",
     };
   }
 
   async delete(id: string) {
-    const lessonSchedule = await LessonScheduleModel.deleteOne({
+    const lesson = await LessonModel.deleteOne({
       _id: id,
     });
-    if (!lessonSchedule.deletedCount) {
+    if (!lesson.deletedCount) {
       throw new Error("Lesson schedule already delete");
     }
 
@@ -44,40 +44,30 @@ class LessonScheduleService {
     };
   }
 
-  async getLessonSchedules() {
-    const lessonSchedules = await LessonScheduleModel.find({}, null, { sort: { date_start_event: 1 } });
-
-    return lessonSchedules;
-  }
-
-  async getLessonSchedule(id: string) {
-    const lesson_schedules = await LessonScheduleModel.findOne({ _id: id });
+  async getLesson(id: string) {
+    const lesson_schedules = await LessonModel.findOne({ _id: id });
     return lesson_schedules;
   }
 
-  async getStudents(id: string) {
-    const lessonStudents = await LessonScheduleModel.findById(id).select("students");
+  async getAllStudentsFromLesson(id: string) {
+    const lessonStudents = await LessonModel.findById(id).select("students");
     const students = await StudentModel.find({
       _id: { $in: lessonStudents?.students },
     });
     return students;
   }
 
-  async deleteStudent(lessonId: string, studentId: string) {
-    const updatedPost = await LessonScheduleModel.findOneAndUpdate(
-      { _id: lessonId },
-      { $pull: { students: studentId } },
-      { new: true },
-    );
+  async deleteStudentFromLesson(lessonId: string, studentId: string) {
+    await LessonModel.findOneAndUpdate({ _id: lessonId }, { $pull: { students: studentId } }, { new: true });
 
     return true;
   }
 
-  async getUpcomingPaginatedPosts(size: number, page: number) {
-    const total_count = await LessonScheduleModel.countDocuments();
+  async getUpcomingLessons(size: number, page: number) {
+    const total_count = await LessonModel.countDocuments();
     const { nextPage, total_pages, skip_size } = getPaginationInfo(size, page, total_count);
     const currentDate = new Date();
-    const lessons = await LessonScheduleModel.aggregate([
+    const lessons = await LessonModel.aggregate([
       {
         $match: {
           date_start_event: { $gte: currentDate },
@@ -119,10 +109,10 @@ class LessonScheduleService {
     };
   }
 
-  async getPaginatedPosts(size: number, page: number) {
-    const total_count = await LessonScheduleModel.countDocuments();
+  async getLessonsPaginated(size: number, page: number) {
+    const total_count = await LessonModel.countDocuments();
     const { nextPage, total_pages, skip_size } = getPaginationInfo(size, page, total_count);
-    const lessons = await LessonScheduleModel.aggregate([
+    const lessons = await LessonModel.aggregate([
       {
         $project: {
           heading: 1,
@@ -159,9 +149,9 @@ class LessonScheduleService {
     };
   }
 
-  async getLessonsFormEvents() {
+  async getLessonsForCtaForm() {
     const currentDate = new Date();
-    const lessons = await LessonScheduleModel.aggregate([
+    const lessons = await LessonModel.aggregate([
       {
         $match: {
           date_start_event: { $gte: currentDate },
@@ -197,4 +187,4 @@ class LessonScheduleService {
   }
 }
 
-export default LessonScheduleService;
+export default LessonService;

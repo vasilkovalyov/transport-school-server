@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import status from "../../utils/status";
-import { StudentService } from "../../services/public";
+import status from "../utils/status";
+import { StudentService } from "../services";
 
 class StudentController {
   service: StudentService;

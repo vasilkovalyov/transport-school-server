@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 import status from "../utils/status";
-import { LessonScheduleService } from "../services";
+import { LessonService } from "../services";
 
-class LessonScheduleController {
-  lessonScheduleService: LessonScheduleService;
+class LessonController {
+  lessonService: LessonService;
 
   constructor() {
-    this.lessonScheduleService = new LessonScheduleService();
+    this.lessonService = new LessonService();
   }
 
   async create(req: Request, res: Response) {
     try {
-      const response = await this.lessonScheduleService.create(req.body);
+      const response = await this.lessonService.create(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       console.log(e);
@@ -24,7 +24,7 @@ class LessonScheduleController {
 
   async update(req: Request, res: Response) {
     try {
-      const response = await this.lessonScheduleService.update(req.body);
+      const response = await this.lessonService.update(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -38,7 +38,7 @@ class LessonScheduleController {
     try {
       const { id } = req.params;
 
-      const response = await this.lessonScheduleService.delete(id);
+      const response = await this.lessonService.delete(id);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -48,10 +48,10 @@ class LessonScheduleController {
     }
   }
 
-  async getLessonSchedule(req: Request, res: Response) {
+  async getLesson(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const response = await this.lessonScheduleService.getLessonSchedule(id);
+      const response = await this.lessonService.getLesson(id);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -61,10 +61,10 @@ class LessonScheduleController {
     }
   }
 
-  async getPaginatedPosts(req: Request, res: Response) {
+  async getLessonsPaginated(req: Request, res: Response) {
     try {
       const { size, page } = req.query as unknown as { size: string; page: string };
-      const response = await this.lessonScheduleService.getPaginatedPosts(parseInt(size), parseInt(page));
+      const response = await this.lessonService.getLessonsPaginated(parseInt(size), parseInt(page));
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -74,10 +74,10 @@ class LessonScheduleController {
     }
   }
 
-  async getStudents(req: Request, res: Response) {
+  async getAllStudentsFromLesson(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const response = await this.lessonScheduleService.getStudents(id);
+      const response = await this.lessonService.getAllStudentsFromLesson(id);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -87,11 +87,11 @@ class LessonScheduleController {
     }
   }
 
-  async deleteStudent(req: Request, res: Response) {
+  async deleteStudentFromLesson(req: Request, res: Response) {
     try {
       const { id_lesson, id_student } = req.query;
       if (id_lesson && id_student) {
-        const response = await this.lessonScheduleService.deleteStudent(id_lesson as string, id_student as string);
+        const response = await this.lessonService.deleteStudentFromLesson(id_lesson as string, id_student as string);
         return res.status(status.SUCCESS).json(response);
       }
       throw new Error("You have to add id_student and id_lesson");
@@ -104,4 +104,4 @@ class LessonScheduleController {
   }
 }
 
-export default LessonScheduleController;
+export default LessonController;

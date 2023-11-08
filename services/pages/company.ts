@@ -1,12 +1,12 @@
 import { BlockHeroModel, BlockAboutModel } from "../../models";
 
 import {
-  getBlockFaqPublicData,
-  getBlockAchivmentsPublicData,
-  getBlockContactsPublicData,
-  getBlockReviewsPublicData,
-  getBlockBlogPublicData,
-} from "../public/reuse-blocks";
+  ReuseBlockAchivmentsService,
+  ReuseBlockFaqService,
+  ReuseBlockContactsService,
+  ReuseBlockReviewService,
+  ReuseBlockBlogService,
+} from "../reuse-blocks";
 
 import { PageType } from "./type";
 
@@ -15,14 +15,20 @@ class PageCompanyService {
     const page = "company";
     const params = { block_page: page, publish: true };
 
+    const reuseBlockAchivmentsService = new ReuseBlockAchivmentsService();
+    const reuseBlockFaqServiceService = new ReuseBlockFaqService();
+    const reuseBlockContactsServiceService = new ReuseBlockContactsService();
+    const reuseBlockReviewServiceService = new ReuseBlockReviewService();
+    const reuseBlockBlogService = new ReuseBlockBlogService();
+
     const blockHero = await BlockHeroModel.findOne(params);
     const blockAbout = await BlockAboutModel.findOne(params);
 
-    const blockAchivmentsData = await getBlockAchivmentsPublicData(page);
-    const blockContactsData = await getBlockContactsPublicData(page);
-    const blockReviewData = await getBlockReviewsPublicData(page);
-    const blockFaqData = await getBlockFaqPublicData(page);
-    const blockBlogData = await getBlockBlogPublicData(page);
+    const blockAchivmentsData = await reuseBlockAchivmentsService.getBlockForPublic(page);
+    const blockContactsData = await reuseBlockContactsServiceService.getBlockForPublic(page);
+    const blockReviewData = await reuseBlockReviewServiceService.getBlockForPublic(page);
+    const blockFaqData = await reuseBlockFaqServiceService.getBlockForPublic(page);
+    const blockBlogData = await reuseBlockBlogService.getBlockForPublic(page);
 
     const blocks = [
       blockHero,
