@@ -70,7 +70,7 @@ class StudentService {
   async delete(id: string) {
     await StudentModel.findOneAndDelete({ _id: id });
     return {
-      message: "Review has deleted",
+      message: "Student has deleted",
     };
   }
 
@@ -82,6 +82,16 @@ class StudentService {
       })
       .exec();
     return posts;
+  }
+
+  async getStudent(id: string) {
+    const response = await StudentModel.findById(id)
+      .populate({
+        path: "lessons",
+        select: "_id heading type_group type_lesson time_start time_end date_start_event days max_people",
+      })
+      .exec();
+    return response;
   }
 }
 

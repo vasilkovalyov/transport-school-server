@@ -3,15 +3,15 @@ import status from "../utils/status";
 import { ServiceServices } from "../services";
 
 class ServiceController {
-  Service: ServiceServices;
+  service: ServiceServices;
 
   constructor() {
-    this.Service = new ServiceServices();
+    this.service = new ServiceServices();
   }
 
   async create(req: Request, res: Response) {
     try {
-      const response = await this.Service.create(req.body);
+      const response = await this.service.create(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -23,7 +23,7 @@ class ServiceController {
 
   async update(req: Request, res: Response) {
     try {
-      const response = await this.Service.update(req.body);
+      const response = await this.service.update(req.body);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -37,7 +37,7 @@ class ServiceController {
     try {
       const { id } = req.params;
 
-      const response = await this.Service.delete(id);
+      const response = await this.service.delete(id);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -51,7 +51,7 @@ class ServiceController {
     try {
       const { id } = req.params;
 
-      const response = await this.Service.getService(id);
+      const response = await this.service.getService(id);
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
@@ -63,7 +63,7 @@ class ServiceController {
 
   async getServices(req: Request, res: Response) {
     try {
-      const response = await this.Service.getServices();
+      const response = await this.service.getServices();
       return res.status(status.SUCCESS).json(response);
     } catch (e) {
       if (!(e instanceof Error)) return;
