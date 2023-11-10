@@ -74,6 +74,20 @@ class LessonController {
     }
   }
 
+  async getLessonsForStudentPaginated(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { size, page } = req.query as unknown as { size: string; page: string };
+      const response = await this.lessonService.getLessonsForStudentPaginated(id, parseInt(size), parseInt(page));
+      return res.status(status.SUCCESS).json(response);
+    } catch (e) {
+      if (!(e instanceof Error)) return;
+      return res.status(status.BAD_REQUEST).json({
+        error: e.message,
+      });
+    }
+  }
+
   async getAllStudentsFromLesson(req: Request, res: Response) {
     try {
       const { id } = req.params;

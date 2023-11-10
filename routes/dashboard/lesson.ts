@@ -9,6 +9,9 @@ router.post("/lesson-schedule-create", authMiddleware, (res, req) => lessonContr
 router.patch("/lesson-schedule-update", authMiddleware, (res, req) => lessonController.update(res, req));
 router.delete("/lesson-schedule-delete/:id", authMiddleware, (res, req) => lessonController.delete(res, req));
 router.get("/lesson-schedules", authMiddleware, (res, req) => lessonController.getLessonsPaginated(res, req));
+router.get("/lesson-schedules-student/:id", authMiddleware, (res, req) =>
+  lessonController.getLessonsForStudentPaginated(res, req),
+);
 router.get("/lesson-schedule-students/:id", authMiddleware, (res, req) =>
   lessonController.getAllStudentsFromLesson(res, req),
 );

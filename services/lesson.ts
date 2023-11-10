@@ -58,6 +58,7 @@ class LessonService {
   }
 
   async deleteStudentFromLesson(lessonId: string, studentId: string) {
+    await StudentModel.findOneAndUpdate({ _id: studentId }, { $pull: { lessons: lessonId } }, { new: true });
     await LessonModel.findOneAndUpdate({ _id: lessonId }, { $pull: { students: studentId } }, { new: true });
 
     return true;
@@ -136,6 +137,29 @@ class LessonService {
         $sort: { date_start_event: 1 },
       },
     ])
+      .skip(skip_size)
+      .limit(size)
+      .exec();
+
+    return {
+      total_count,
+      current_page: page,
+      next_page: nextPage,
+      total_pages: total_pages,
+      posts: lessons,
+    };
+  }
+
+  async getLessonsForStudentPaginated(id: string, size: number, page: number) {
+    const student = await StudentModel.findById(id);
+    if (!student) {
+      throw new Error("Student not found");
+    }
+    const total_count = student.lessons.length;
+    const { nextPage, total_pages, skip_size } = getPaginationInfo(size, page, total_count);
+
+    const lessons = await LessonModel.find({ _id: { $in: student.lessons } })
+      .select("heading type_group type_lesson days time_start time_end date_start_event")
       .skip(skip_size)
       .limit(size)
       .exec();

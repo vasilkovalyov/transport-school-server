@@ -22,6 +22,7 @@ export const StudentSchema = new Schema<StudentType>(
         type: Schema.Types.ObjectId,
         ref: "Lesson",
         required: true,
+        default: [],
       },
     ],
   },

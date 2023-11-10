@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { StudentCreateType, StudentModel, LessonModel } from "../models";
 import { MailService } from ".";
 
@@ -68,7 +68,19 @@ class StudentService {
   }
 
   async delete(id: string) {
-    await StudentModel.findOneAndDelete({ _id: id });
+    const student = await StudentModel.findById(id);
+    if (!student) {
+      throw new Error("Student not found");
+    }
+    const lessonsIds = student?.lessons;
+    const lessons = await LessonModel.find({ _id: { $in: lessonsIds } });
+    for (const lesson of lessons) {
+      lesson.students = lesson.students.filter((lessonId) => lessonId.toString() !== id);
+      await lesson.save();
+    }
+
+    await StudentModel.findByIdAndRemove(id);
+
     return {
       message: "Student has deleted",
     };
