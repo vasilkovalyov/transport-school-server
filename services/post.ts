@@ -83,6 +83,19 @@ class PostService {
     const post = await PostModel.findOne({ slug: slug });
     return post;
   }
+
+  async getPostSeo(slug: string) {
+    const post = await PostModel.findOne({ slug: slug }).select("heading seo_description seo_keywords");
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    return {
+      title: post?.heading,
+      description: post?.seo_description,
+      keywords: post?.seo_keywords,
+    };
+  }
 }
 
 export default PostService;

@@ -33,6 +33,20 @@ class PostsController {
       });
     }
   }
+
+  async getPostSeo(req: Request, res: Response) {
+    try {
+      const { slug } = req.params;
+
+      const response = await this.service.getPostSeo(slug);
+      return res.status(status.SUCCESS).json(response);
+    } catch (e) {
+      if (!(e instanceof Error)) return;
+      return res.status(status.BAD_REQUEST).json({
+        error: e.message,
+      });
+    }
+  }
 }
 
 export default PostsController;
